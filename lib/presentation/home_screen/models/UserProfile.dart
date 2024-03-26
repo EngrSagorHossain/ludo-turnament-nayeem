@@ -1,16 +1,20 @@
 import 'dart:convert';
-/// user : {"id":2,"role_id":2,"full_name":"arnab","phone":"01628993875","college_name":"dhaka college","hsc_exam_year":"2017","email":"admin1@gmail.com","avatar":"users/default.png","is_ban":0,"balance":"0","package_status":"active","profile_image":null,"created_at":"2024-02-01T18:38:46.000000Z","updated_at":"2024-02-01T18:38:46.000000Z"}
-/// token : "12|vQhEZnvBNG942ZT7YsnTZ59UM2d319YEz5CiYrccfb948678"
 
-UserProfile userProfileFromJson(String str) => UserProfile.fromJson(json.decode(str));
+/// user : {"id":1,"role_id":1,"name":"nayeem","image":"sdfsadf","phone":"01941949288","username":"nayeem","address":"alksdfksadf","rating":"120","level":"20","total_wins":"320","total_coins":"2130","email":"nayeem@gmail.com","avatar":"users/default.png"}
+/// token : "2|PFni5CUUNIxXtfsp9xwZAtm1QQE2jpF8yQY1EnVOfd8d69c9"
+
+UserProfile userProfileFromJson(String str) =>
+    UserProfile.fromJson(json.decode(str));
 String userProfileToJson(UserProfile data) => json.encode(data.toJson());
+
 class UserProfile {
   UserProfile({
-      User? user, 
-      String? token,}){
+    User? user,
+    String? token,
+  }) {
     _user = user;
     _token = token;
-}
+  }
 
   UserProfile.fromJson(dynamic json) {
     _user = json['user'] != null ? User.fromJson(json['user']) : null;
@@ -18,11 +22,14 @@ class UserProfile {
   }
   User? _user;
   String? _token;
-UserProfile copyWith({  User? user,
-  String? token,
-}) => UserProfile(  user: user ?? _user,
-  token: token ?? _token,
-);
+  UserProfile copyWith({
+    User? user,
+    String? token,
+  }) =>
+      UserProfile(
+        user: user ?? _user,
+        token: token ?? _token,
+      );
   User? get user => _user;
   String? get token => _token;
 
@@ -34,149 +41,143 @@ UserProfile copyWith({  User? user,
     map['token'] = _token;
     return map;
   }
-
 }
 
-/// id : 2
-/// role_id : 2
-/// full_name : "arnab"
-/// phone : "01628993875"
-/// college_name : "dhaka college"
-/// hsc_exam_year : "2017"
-/// email : "admin1@gmail.com"
+/// id : 1
+/// role_id : 1
+/// name : "nayeem"
+/// image : "sdfsadf"
+/// phone : "01941949288"
+/// username : "nayeem"
+/// address : "alksdfksadf"
+/// rating : "120"
+/// level : "20"
+/// total_wins : "320"
+/// total_coins : "2130"
+/// email : "nayeem@gmail.com"
 /// avatar : "users/default.png"
-/// is_ban : 0
-/// balance : "0"
-/// package_status : "active"
-/// profile_image : null
-/// created_at : "2024-02-01T18:38:46.000000Z"
-/// updated_at : "2024-02-01T18:38:46.000000Z"
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
+
 class User {
   User({
-      num? id, 
-      num? roleId, 
-      String? fullName, 
-      String? phone, 
-      String? collegeName, 
-      String? hscExamYear, 
-      String? email, 
-      String? avatar, 
-      num? isBan, 
-      String? balance, 
-      String? packageStatus, 
-      dynamic profileImage, 
-      String? createdAt, 
-      String? updatedAt,}){
+    num? id,
+    num? roleId,
+    String? name,
+    String? image,
+    String? phone,
+    String? username,
+    String? address,
+    String? rating,
+    String? level,
+    String? totalWins,
+    String? totalCoins,
+    String? email,
+    String? avatar,
+  }) {
     _id = id;
     _roleId = roleId;
-    _fullName = fullName;
+    _name = name;
+    _image = image;
     _phone = phone;
-    _collegeName = collegeName;
-    _hscExamYear = hscExamYear;
+    _username = username;
+    _address = address;
+    _rating = rating;
+    _level = level;
+    _totalWins = totalWins;
+    _totalCoins = totalCoins;
     _email = email;
     _avatar = avatar;
-    _isBan = isBan;
-    _balance = balance;
-    _packageStatus = packageStatus;
-    _profileImage = profileImage;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
-}
+  }
 
   User.fromJson(dynamic json) {
     _id = json['id'];
     _roleId = json['role_id'];
-    _fullName = json['full_name'];
+    _name = json['name'];
+    _image = json['image'];
     _phone = json['phone'];
-    _collegeName = json['college_name'];
-    _hscExamYear = json['hsc_exam_year'];
+    _username = json['username'];
+    _address = json['address'];
+    _rating = json['rating'];
+    _level = json['level'];
+    _totalWins = json['total_wins'];
+    _totalCoins = json['total_coins'];
     _email = json['email'];
     _avatar = json['avatar'];
-    _isBan = json['is_ban'];
-    _balance = json['balance'];
-    _packageStatus = json['package_status'];
-    _profileImage = json['profile_image'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
   }
   num? _id;
   num? _roleId;
-  String? _fullName;
+  String? _name;
+  String? _image;
   String? _phone;
-  String? _collegeName;
-  String? _hscExamYear;
+  String? _username;
+  String? _address;
+  String? _rating;
+  String? _level;
+  String? _totalWins;
+  String? _totalCoins;
   String? _email;
   String? _avatar;
-  num? _isBan;
-  String? _balance;
-  String? _packageStatus;
-  dynamic _profileImage;
-  String? _createdAt;
-  String? _updatedAt;
-User copyWith({  num? id,
-  num? roleId,
-  String? fullName,
-  String? phone,
-  String? collegeName,
-  String? hscExamYear,
-  String? email,
-  String? avatar,
-  num? isBan,
-  String? balance,
-  String? packageStatus,
-  dynamic profileImage,
-  String? createdAt,
-  String? updatedAt,
-}) => User(  id: id ?? _id,
-  roleId: roleId ?? _roleId,
-  fullName: fullName ?? _fullName,
-  phone: phone ?? _phone,
-  collegeName: collegeName ?? _collegeName,
-  hscExamYear: hscExamYear ?? _hscExamYear,
-  email: email ?? _email,
-  avatar: avatar ?? _avatar,
-  isBan: isBan ?? _isBan,
-  balance: balance ?? _balance,
-  packageStatus: packageStatus ?? _packageStatus,
-  profileImage: profileImage ?? _profileImage,
-  createdAt: createdAt ?? _createdAt,
-  updatedAt: updatedAt ?? _updatedAt,
-);
+  User copyWith({
+    num? id,
+    num? roleId,
+    String? name,
+    String? image,
+    String? phone,
+    String? username,
+    String? address,
+    String? rating,
+    String? level,
+    String? totalWins,
+    String? totalCoins,
+    String? email,
+    String? avatar,
+  }) =>
+      User(
+        id: id ?? _id,
+        roleId: roleId ?? _roleId,
+        name: name ?? _name,
+        image: image ?? _image,
+        phone: phone ?? _phone,
+        username: username ?? _username,
+        address: address ?? _address,
+        rating: rating ?? _rating,
+        level: level ?? _level,
+        totalWins: totalWins ?? _totalWins,
+        totalCoins: totalCoins ?? _totalCoins,
+        email: email ?? _email,
+        avatar: avatar ?? _avatar,
+      );
   num? get id => _id;
   num? get roleId => _roleId;
-  String? get fullName => _fullName;
+  String? get name => _name;
+  String? get image => _image;
   String? get phone => _phone;
-  String? get collegeName => _collegeName;
-  String? get hscExamYear => _hscExamYear;
+  String? get username => _username;
+  String? get address => _address;
+  String? get rating => _rating;
+  String? get level => _level;
+  String? get totalWins => _totalWins;
+  String? get totalCoins => _totalCoins;
   String? get email => _email;
   String? get avatar => _avatar;
-  num? get isBan => _isBan;
-  String? get balance => _balance;
-  String? get packageStatus => _packageStatus;
-  dynamic get profileImage => _profileImage;
-  String? get createdAt => _createdAt;
-  String? get updatedAt => _updatedAt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['role_id'] = _roleId;
-    map['full_name'] = _fullName;
+    map['name'] = _name;
+    map['image'] = _image;
     map['phone'] = _phone;
-    map['college_name'] = _collegeName;
-    map['hsc_exam_year'] = _hscExamYear;
+    map['username'] = _username;
+    map['address'] = _address;
+    map['rating'] = _rating;
+    map['level'] = _level;
+    map['total_wins'] = _totalWins;
+    map['total_coins'] = _totalCoins;
     map['email'] = _email;
     map['avatar'] = _avatar;
-    map['is_ban'] = _isBan;
-    map['balance'] = _balance;
-    map['package_status'] = _packageStatus;
-    map['profile_image'] = _profileImage;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
     return map;
   }
-
 }

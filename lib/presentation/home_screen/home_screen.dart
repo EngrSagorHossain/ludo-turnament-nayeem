@@ -1,17 +1,22 @@
 // ignore_for_file: dead_code
 
-import 'controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
-import 'package:ludu_365/widgets/custom_outlined_button.dart';
-import 'package:ludu_365/presentation/settings_dialog/settings_dialog.dart';
+import 'package:ludu_365/presentation/home_screen/controller/auth_controller.dart';
 import 'package:ludu_365/presentation/settings_dialog/controller/settings_controller.dart';
+import 'package:ludu_365/presentation/settings_dialog/settings_dialog.dart';
+import 'package:ludu_365/widgets/custom_outlined_button.dart';
+
+import '../profile_two_dialog/controller/profile_two_controller.dart';
+import '../profile_two_dialog/profile_two_dialog.dart';
+import 'controller/home_controller.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.find();
     return SafeArea(
         child: Scaffold(
             body: Container(
@@ -19,9 +24,9 @@ class HomeScreen extends GetWidget<HomeController> {
                 padding: EdgeInsets.symmetric(horizontal: 11.h, vertical: 27.v),
                 child: Column(children: [
                   _buildNerdOneRow(),
-            
+
                   SizedBox(height: 39.v),
-            
+
                   //home logo//////////////////////////////////////
                   CustomImageView(
                       imagePath: ImageConstant.imgGroupBlack900,
@@ -31,9 +36,9 @@ class HomeScreen extends GetWidget<HomeController> {
                       margin: EdgeInsets.only(left: 60.h)),
                   SizedBox(height: 38.v),
                   /////////////////////////////////////////////////
-            
+
                   //Done
-            
+
                   // 4 container.....................................
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 29.h),
@@ -49,7 +54,7 @@ class HomeScreen extends GetWidget<HomeController> {
                                     onTapVsElevenColumn: () {
                                       onTapVsElevenColumn();
                                     })),
-            
+
                             // 4 container 2st pass n play
                             Padding(
                                 padding: EdgeInsets.only(left: 17.h),
@@ -61,7 +66,7 @@ class HomeScreen extends GetWidget<HomeController> {
                                     }))
                           ])),
                   SizedBox(height: 30.v),
-            
+
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 29.h),
                       child: Row(
@@ -78,7 +83,7 @@ class HomeScreen extends GetWidget<HomeController> {
                                     onTapTournamentColumn: () {
                                       onTapTournamentColumn();
                                     })),
-            
+
                             // 4 container 4st tournament
                             Padding(
                                 padding: EdgeInsets.only(left: 17.h),
@@ -91,18 +96,18 @@ class HomeScreen extends GetWidget<HomeController> {
                                     }))
                           ])),
                   SizedBox(height: 32.v),
-            
+
                   // 4 caontainer done ..........$$$$$$$$
-            
+
                   ///tournament image//
                   CustomImageView(
                       imagePath: ImageConstant.imgGroupYellowA400,
                       height: 39.v,
                       width: 171.h),
                   SizedBox(height: 24.v),
-            
+
                   ////////////////////////////////////
-            
+
                   //am pm//////
                   Align(
                       alignment: Alignment.centerRight,
@@ -160,12 +165,28 @@ class HomeScreen extends GetWidget<HomeController> {
 
   /// Section Widget
   Widget _buildNerdOneRow() {
+    AuthController authController = Get.find();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         //home profile
         GestureDetector(
             onTap: () {
-              onTapFrameOne();
+              if (authController.token.value.isEmpty) {
+                Get.toNamed(
+                  AppRoutes.profileScreen,
+                );
+              } else {
+                Get.dialog(AlertDialog(
+                  backgroundColor: Colors.transparent,
+                  contentPadding: EdgeInsets.zero,
+                  insetPadding: const EdgeInsets.only(left: 0),
+                  content: ProfileTwoDialog(
+                    Get.put(
+                      ProfileTwoController(),
+                    ),
+                  ),
+                ));
+              }
             },
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 3.h, vertical: 2.v),
@@ -282,7 +303,7 @@ class HomeScreen extends GetWidget<HomeController> {
 
       //exit
       InkWell(
-        onTap: (){
+        onTap: () {
           Get.toNamed(AppRoutes.exitThreeScreen);
         },
         child: Padding(
@@ -342,56 +363,58 @@ class HomeScreen extends GetWidget<HomeController> {
     Function? onTapTournamentColumn,
   }) {
     return GestureDetector(
-        onTap: () {
-          onTapTournamentColumn!.call();
-        },
-        child: SizedBox(
-            width: 123,
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 4.v),
-                decoration: AppDecoration.outlineOnPrimaryContainer
-                    .copyWith(borderRadius: BorderRadiusStyle.roundedBorder15),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 2.v),
-                      SizedBox(
-                          height: 47.v,
-                          width: 110.h,
-                          child: Stack(alignment: Alignment.center, children: [
-                            Align(
-                                alignment: Alignment.topCenter,
-                                child: Padding(
-                                    padding: EdgeInsets.only(top: 13.v),
-                                    child: Text(tournamentText,
-                                        style: CustomTextStyles
-                                            .bodyMediumRacingSansOne
-                                            .copyWith(
-                                                color: theme.colorScheme
-                                                    .onPrimaryContainer)))),
-                            Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                    height: 47.v,
-                                    width: 110.h,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 37.h, vertical: 6.v),
-                                    decoration: AppDecoration.fillGray.copyWith(
-                                        borderRadius:
-                                            BorderRadiusStyle.customBorderTL10),
-                                    child: CustomImageView(
-                                        imagePath: trophyImage,
-                                        height: 35.adaptSize,
-                                        width: 35.adaptSize,
-                                        alignment: Alignment.center)))
-                          ])),
-                      SizedBox(height: 2.v),
-                      Text(tOURNAMENTS,
-                          style: CustomTextStyles.bodyMediumRacingSansOne
-                              .copyWith(
-                                  color: theme.colorScheme.onPrimaryContainer))
-                    ]))));
+      onTap: () {
+        onTapTournamentColumn!.call();
+      },
+      child: SizedBox(
+        width: 123,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 4.v),
+          decoration: AppDecoration.outlineOnPrimaryContainer
+              .copyWith(borderRadius: BorderRadiusStyle.roundedBorder15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 2.v),
+              SizedBox(
+                  height: 47.v,
+                  width: 110.h,
+                  child: Stack(alignment: Alignment.center, children: [
+                    Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                            padding: EdgeInsets.only(top: 13.v),
+                            child: Text(tournamentText,
+                                style: CustomTextStyles.bodyMediumRacingSansOne
+                                    .copyWith(
+                                        color: theme
+                                            .colorScheme.onPrimaryContainer)))),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                            height: 47.v,
+                            width: 110.h,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 37.h, vertical: 6.v),
+                            decoration: AppDecoration.fillGray.copyWith(
+                                borderRadius:
+                                    BorderRadiusStyle.customBorderTL10),
+                            child: CustomImageView(
+                                imagePath: trophyImage,
+                                height: 35.adaptSize,
+                                width: 35.adaptSize,
+                                alignment: Alignment.center)))
+                  ])),
+              SizedBox(height: 2.v),
+              Text(tOURNAMENTS,
+                  style: CustomTextStyles.bodyMediumRacingSansOne
+                      .copyWith(color: theme.colorScheme.onPrimaryContainer))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   /// Navigates to the profileScreen when the action is triggered.

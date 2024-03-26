@@ -1,4 +1,5 @@
 import 'package:ludu_365/core/app_export.dart';
+import 'package:ludu_365/presentation/home_screen/controller/auth_controller.dart';
 import 'package:ludu_365/presentation/profile_screen/models/profile_model.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,10 @@ class ProfileController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   Rx<ProfileModel> profileModelObj = ProfileModel().obs;
+
+  AuthController authController = Get.find();
+
+
 
   @override
   void onClose() {

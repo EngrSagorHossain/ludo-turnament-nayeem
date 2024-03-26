@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
 
@@ -20,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
     print("Starting...");
     // Delay for 3 seconds before executing the function
     Future.delayed(Duration(seconds: 3), () {
-      print("ddddddddddddddddddddddddd");
       Get.toNamed(AppRoutes.bottomNavigationScreen);
     });
   }

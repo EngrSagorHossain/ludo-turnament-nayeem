@@ -2,11 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:ludu_365/core/app_export.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import '../../../utils/api_endpoints.dart';
+import '../../profile_two_dialog/controller/profile_two_controller.dart';
+import '../../profile_two_dialog/profile_two_dialog.dart';
 import '../models/UserProfile.dart';
+
 class AuthController extends GetxController {
   final isLoading = false.obs;
   final loadingChangePassword = false.obs;
@@ -36,27 +39,25 @@ class AuthController extends GetxController {
       print(response.statusCode);
       if (statusCode == 200) {
         preferences.clear();
-        // Get.offAll(LoginView());
+        Get.offAllNamed(AppRoutes.homeScreen);
         token.value = '';
       } else {}
     } catch (e) {
       print(e);
       isLoading.value = false;
       preferences.clear();
-      // Get.offAll(LoginView());
+      Get.offAllNamed(AppRoutes.homeScreen);
       token.value = '';
     }
   }
 
 //sign in
-
-  final TextEditingController passWordController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  void tryToSignIn() async {
+  void tryToSignIn({required String userName, required String password}) async {
+    print('called');
     isLoading.value = true;
     var data = {
-      'phone': phoneController.text,
-      'password': passWordController.text,
+      'username': userName,
+      'password': password,
     };
     var dio = Dio();
 
@@ -65,7 +66,8 @@ class AuthController extends GetxController {
         kLogin,
         data: data,
       );
-
+      print(response.data);
+      print('login data');
       int? statusCode = response.statusCode;
       isLoading.value = false;
       if (statusCode == 200) {
@@ -74,7 +76,16 @@ class AuthController extends GetxController {
         //SET TO LOCAL
         preferences.setString('token', response.data['token']);
         preferences.setString('profile', jsonEncode(response.data));
-
+        Get.dialog(AlertDialog(
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          insetPadding: const EdgeInsets.only(left: 0),
+          content: ProfileTwoDialog(
+            Get.put(
+              ProfileTwoController(),
+            ),
+          ),
+        ));
         Get.snackbar(
           'Success',
           "You are Logged In now.",
@@ -82,8 +93,6 @@ class AuthController extends GetxController {
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
-
-        // Get.offAll(const BottomNavigationView());
       } else {
         Get.snackbar(
           'Failed',
@@ -94,6 +103,7 @@ class AuthController extends GetxController {
         );
       }
     } catch (e) {
+      print(e);
       isLoading.value = false;
       Get.snackbar(
         'Failed',
@@ -110,7 +120,7 @@ class AuthController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController regPhoneNumberController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController examYearController = TextEditingController();
   final TextEditingController collegeController = TextEditingController();
 
@@ -333,46 +343,5 @@ class AuthController extends GetxController {
         profile.value = UserProfile.fromJson(jsonDecode(value));
       }
     });
-  }
-
-  final myPurchasePackageIds = [].obs;
-  Future<void> fetchPurchasePackageIds() async {
-    try {
-      print(kPurchasedPackageListIds);
-      final response = await _dio.get(
-        kPurchasedPackageListIds,
-        options: Options(
-          headers: {
-            'accept': '*/*',
-            'Authorization': 'Bearer ${token.value}',
-          },
-        ),
-      );
-
-      print(response.data);
-
-      if (response.statusCode == 200) {
-        myPurchasePackageIds.clear();
-
-        myPurchasePackageIds.value = response.data;
-      } else {
-        Get.snackbar(
-          'Failed',
-          "Something is wrong. Please try again.",
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      }
-    } catch (e) {
-      print(e);
-      Get.snackbar(
-        'Failed',
-        "Something is wrong. Please try again.",
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
   }
 }

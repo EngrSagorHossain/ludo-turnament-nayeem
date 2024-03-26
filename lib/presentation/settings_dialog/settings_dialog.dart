@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/widgets/custom_icon_button.dart';
 
 import 'controller/settings_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:ludu_365/core/app_export.dart';
 
 // ignore: must_be_immutable
 class SettingsDialog extends StatelessWidget {
@@ -224,8 +224,6 @@ class SettingsDialog extends StatelessWidget {
             SizedBox(
               height: 30.v,
             ),
-
-
             Padding(
                 padding: EdgeInsets.only(bottom: 3.v),
                 child: CustomIconButton(
@@ -233,8 +231,7 @@ class SettingsDialog extends StatelessWidget {
                     width: 32.h,
                     padding: EdgeInsets.all(4.h),
                     onTap: () {
-                      print("dddddddddddddddddddddddddddddddddddddddddddddddddd");
-                       Get.back();
+                      Get.back();
                     },
                     child:
                         CustomImageView(imagePath: ImageConstant.imgGroup27))),
