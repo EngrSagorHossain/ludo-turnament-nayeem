@@ -1,6 +1,7 @@
-import 'package:ludu_365/core/app_export.dart';
-import 'package:ludu_365/presentation/registration_submit_screen/models/registration_submit_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ludu_365/core/app_export.dart';
+import 'package:ludu_365/presentation/home_screen/controller/auth_controller.dart';
+import 'package:ludu_365/presentation/registration_submit_screen/models/registration_submit_model.dart';
 
 /// A controller class for the RegistrationSubmitScreen.
 ///
@@ -13,11 +14,14 @@ class RegistrationSubmitController extends GetxController {
 
   TextEditingController phoneNumberRowController = TextEditingController();
 
+  TextEditingController emailRowController = TextEditingController();
+
   TextEditingController transactionIdRowController = TextEditingController();
 
   Rx<RegistrationSubmitModel> registrationSubmitModelObj =
       RegistrationSubmitModel().obs;
 
+  AuthController authController = Get.find();
   @override
   void onClose() {
     super.onClose();

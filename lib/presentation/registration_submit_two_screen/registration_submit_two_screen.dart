@@ -1,4 +1,3 @@
-import 'controller/registration_submit_two_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/core/utils/validation_functions.dart';
@@ -7,6 +6,8 @@ import 'package:ludu_365/widgets/app_bar/appbar_title.dart';
 import 'package:ludu_365/widgets/app_bar/custom_app_bar.dart';
 import 'package:ludu_365/widgets/custom_elevated_button.dart';
 import 'package:ludu_365/widgets/custom_text_form_field.dart';
+
+import 'controller/registration_submit_two_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class RegistrationSubmitTwoScreen
@@ -18,44 +19,51 @@ class RegistrationSubmitTwoScreen
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(),
-            body: SizedBox(
-                width: SizeUtils.width,
-                child: Form(
-                    key: _formKey,
-                    child: Container(
-                        width: double.maxFinite,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 17.h, vertical: 25.v),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              _buildUsernameRow1(),
-                              SizedBox(height: 23.v),
-                              _buildPasswordRow1(),
-                              SizedBox(height: 23.v),
-                              _buildConfirmPasswordRow1(),
-                              Spacer(),
-                              SizedBox(height: 9.v),
-                              _buildSubmitButton()
-                            ]))))));
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(),
+        body: SizedBox(
+          width: SizeUtils.width,
+          child: Form(
+            key: _formKey,
+            child: Container(
+              width: double.maxFinite,
+              padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 25.v),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  _buildUsernameRow1(),
+                  SizedBox(height: 23.v),
+                  _buildPasswordRow1(),
+                  SizedBox(height: 23.v),
+                  _buildConfirmPasswordRow1(),
+                  Spacer(),
+                  SizedBox(height: 9.v),
+                  _buildSubmitButton()
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar() {
     return CustomAppBar(
-        leadingWidth: 50.h,
-        leading: AppbarLeadingIconbutton(
-            imagePath: ImageConstant.imgGroup27,
-            margin: EdgeInsets.only(left: 18.h, top: 14.v, bottom: 14.v),
-            onTap: () {
-              onTapIconButton();
-            }),
-        title: AppbarTitle(
-            text: "msg_registration_submit".tr,
-            margin: EdgeInsets.only(left: 63.h)));
+      leadingWidth: 50.h,
+      leading: AppbarLeadingIconbutton(
+          imagePath: ImageConstant.imgGroup27,
+          margin: EdgeInsets.only(left: 18.h, top: 14.v, bottom: 14.v),
+          onTap: () {
+            onTapIconButton();
+          }),
+      title: AppbarTitle(
+        text: "msg_registration_submit".tr,
+        margin: EdgeInsets.only(left: 63.h),
+      ),
+    );
   }
 
   /// Section Widget
@@ -160,7 +168,18 @@ class RegistrationSubmitTwoScreen
         margin: EdgeInsets.only(right: 7.h),
         buttonStyle: CustomButtonStyles.fillLightBlue1,
         onPressed: () {
-          onTapSubmitButton();
+          controller.authController.tryToSignUp(
+            name:
+                controller.registrationSubmitController.nameRowController.text,
+            phone: controller
+                .registrationSubmitController.phoneNumberRowController.text,
+            username: controller.usernameRowController.text,
+            address: controller
+                .registrationSubmitController.addressRowController.text,
+            email:
+                controller.registrationSubmitController.emailRowController.text,
+            password: controller.passwordRowController.text,
+          );
         });
   }
 

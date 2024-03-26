@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:ludu_365/core/app_export.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ludu_365/core/app_export.dart' hide FormData, MultipartFile;
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import '../../../utils/api_endpoints.dart';
@@ -124,23 +126,44 @@ class AuthController extends GetxController {
   final TextEditingController examYearController = TextEditingController();
   final TextEditingController collegeController = TextEditingController();
 
-  void tryToSignUp() async {
-    isLoading.value = true;
-    var data = {
-      'full_name': fullNameController.text,
-      'email': emailController.text,
-      'password': regPasswordController.text,
-      'phone': regPhoneNumberController.text,
-      'hsc_exam_year': examYearController.text,
-      'college_name': collegeController.text,
-      'package_status': 'active',
-    };
-    var dio = Dio();
+  //pic image
+  final image = Rxn<File>();
 
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      image.value = File(pickedImage.path);
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  void tryToSignUp({
+    required String name,
+    required String phone,
+    required String username,
+    required String address,
+    required String email,
+    required String password,
+  }) async {
+    isLoading.value = true;
+    FormData formData = FormData.fromMap({
+      'name': name,
+      'phone': phone,
+      'username': username,
+      'address': address,
+      'email': email,
+      'password': password,
+      'image': await MultipartFile.fromFile(image.value!.path),
+    });
+    var dio = Dio();
+    print(formData.toString());
+    print('register data');
     try {
       final response = await dio.post(
         kRegister,
-        data: data,
+        data: formData,
       );
 
       int? statusCode = response.statusCode;
@@ -158,8 +181,7 @@ class AuthController extends GetxController {
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
-
-        // Get.offAll(const BottomNavigationView());
+        Get.offAllNamed(AppRoutes.homeScreen);
       } else {
         Get.snackbar(
           'Failed',

@@ -1,4 +1,3 @@
-import 'controller/registration_submit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/core/utils/validation_functions.dart';
@@ -8,6 +7,8 @@ import 'package:ludu_365/widgets/app_bar/custom_app_bar.dart';
 import 'package:ludu_365/widgets/custom_elevated_button.dart';
 import 'package:ludu_365/widgets/custom_icon_button.dart';
 import 'package:ludu_365/widgets/custom_text_form_field.dart';
+
+import 'controller/registration_submit_controller.dart';
 
 // ignore_for_file: must_be_immutable
 class RegistrationSubmitScreen extends GetWidget<RegistrationSubmitController> {
@@ -19,45 +20,51 @@ class RegistrationSubmitScreen extends GetWidget<RegistrationSubmitController> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-             resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: false,
             appBar: _buildAppBar(),
-            body: SizedBox(
-                        width: SizeUtils.width,
-                child: Form(
-                    key: _formKey,
-                    child: Container(
-                        width: double.maxFinite,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 18.h, vertical: 7.v),
-                        child: Column(children: [
-                          CustomIconButton(
+            body: Obx(() {
+              return SizedBox(
+                  width: SizeUtils.width,
+                  child: Form(
+                      key: _formKey,
+                      child: Container(
+                          width: double.maxFinite,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 18.h, vertical: 7.v),
+                          child: Column(children: [
+                            CustomIconButton(
+                              onTap: () {
+                                controller.authController.pickImage();
+                              },
                               height: 70.adaptSize,
                               width: 70.adaptSize,
                               padding: EdgeInsets.all(25.h),
                               decoration: IconButtonStyleHelper.fillGray,
-                              child: CustomImageView(
-                                  imagePath: ImageConstant.imgGroup95)),
-                      
-                          SizedBox(height: 31.v),
-                          _buildNameEditText(),
-
-
-                          SizedBox(height: 23.v),
-                          _buildAddressEditText(),
-
-
-                          SizedBox(height: 24.v),
-                          _buildPhoneNumberEditText(),
-
-
-                          SizedBox(height: 22.v),
-                          _buildTransactionIdEditText(),
-
-
-                          Spacer(),
-                          SizedBox(height: 27.v),
-                          _buildNextButton()
-                        ]))))));
+                              child:
+                                  controller.authController.image.value != null
+                                      ? CustomImageView(
+                                          imagePath: controller
+                                              .authController.image.value!.path,
+                                        ) // Display picked image
+                                      : CustomImageView(
+                                          imagePath: ImageConstant.imgGroup95,
+                                        ), // Display placeholder image
+                            ),
+                            SizedBox(height: 31.v),
+                            _buildNameEditText(),
+                            SizedBox(height: 23.v),
+                            _buildAddressEditText(),
+                            SizedBox(height: 24.v),
+                            _buildEmailEditText(),
+                            SizedBox(height: 24.v),
+                            _buildPhoneNumberEditText(),
+                            SizedBox(height: 22.v),
+                            _buildTransactionIdEditText(),
+                            Spacer(),
+                            SizedBox(height: 27.v),
+                            _buildNextButton()
+                          ]))));
+            })));
   }
 
   /// Section Widget
@@ -127,6 +134,25 @@ class RegistrationSubmitScreen extends GetWidget<RegistrationSubmitController> {
                       style: theme.textTheme.bodyMedium)),
               _buildAddressRow()
             ]));
+  }
+
+  /// Section Widget
+  Widget _buildEmailEditText() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+            padding: EdgeInsets.only(top: 6.v, bottom: 7.v),
+            child: Text("Email".tr, style: theme.textTheme.bodyMedium)),
+        CustomTextFormField(
+          width: 200.h,
+          controller: controller.emailRowController,
+          hintText: 'Email',
+          textInputType: TextInputType.phone,
+        ),
+      ],
+    );
   }
 
   /// Section Widget
