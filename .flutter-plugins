@@ -1,4 +1,5 @@
 # This is a generated file; do not edit or check into version control.
+audio_session=/home/sagor/.pub-cache/hosted/pub.dev/audio_session-0.1.18/
 connectivity_plus=/home/sagor/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.2/
 file_selector_linux=/home/sagor/.pub-cache/hosted/pub.dev/file_selector_linux-0.9.2+1/
 file_selector_macos=/home/sagor/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.3+3/
@@ -12,6 +13,8 @@ image_picker_ios=/home/sagor/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.9+2/
 image_picker_linux=/home/sagor/.pub-cache/hosted/pub.dev/image_picker_linux-0.2.1+1/
 image_picker_macos=/home/sagor/.pub-cache/hosted/pub.dev/image_picker_macos-0.2.1+1/
 image_picker_windows=/home/sagor/.pub-cache/hosted/pub.dev/image_picker_windows-0.2.1+1/
+just_audio=/home/sagor/.pub-cache/hosted/pub.dev/just_audio-0.9.36/
+just_audio_web=/home/sagor/.pub-cache/hosted/pub.dev/just_audio_web-0.4.9/
 path_provider=/home/sagor/.pub-cache/hosted/pub.dev/path_provider-2.1.2/
 path_provider_android=/home/sagor/.pub-cache/hosted/pub.dev/path_provider_android-2.2.2/
 path_provider_foundation=/home/sagor/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2/

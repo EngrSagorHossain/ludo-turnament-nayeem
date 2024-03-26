@@ -1,6 +1,7 @@
-import 'controller/computer_game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
+
+import 'controller/computer_game_controller.dart';
 
 class ComputerGameScreen extends GetWidget<ComputerGameController> {
   const ComputerGameScreen({Key? key}) : super(key: key);
@@ -54,47 +55,63 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                                     width: 30.adaptSize,
                                     margin: EdgeInsets.only(
                                         left: 6.h, top: 7.v, bottom: 7.v)),
-                                Container(
-                                    height: 44.v,
-                                    width: 46.h,
-                                    margin: EdgeInsets.only(left: 6.h),
-                                    child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          CustomImageView(
-                                              imagePath:
-                                                  ImageConstant.imgGroup6,
-                                              height: 44.v,
-                                              width: 46.h,
-                                              alignment: Alignment.center),
-                                          CustomImageView(
-                                              imagePath:
-                                                  ImageConstant.imgDice22,
-                                              height: 30.adaptSize,
-                                              width: 30.adaptSize,
-                                              alignment: Alignment.center)
-                                        ]))
+                                InkWell(
+                                  onTap: () {
+                                    controller.startGeneratingRandomNumbers();
+                                    print('pressed');
+                                  },
+                                  child: Container(
+                                      height: 44.v,
+                                      width: 46.h,
+                                      margin: EdgeInsets.only(left: 6.h),
+                                      child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            CustomImageView(
+                                                imagePath:
+                                                    ImageConstant.imgGroup6,
+                                                height: 44.v,
+                                                width: 46.h,
+                                                alignment: Alignment.center),
+                                            Obx(() {
+                                              return Transform.rotate(
+                                                angle: controller
+                                                        .randomNumber.value *
+                                                    60 *
+                                                    (3.14159265359 / 180),
+                                                child: CustomImageView(
+                                                  imagePath:
+                                                      'assets/images/dices/${controller.randomNumber.value}.png',
+                                                  height: 30.adaptSize,
+                                                  width: 30.adaptSize,
+                                                  alignment: Alignment.center,
+                                                ),
+                                              );
+                                            })
+                                          ])),
+                                )
                               ])),
                       Spacer(),
                       GestureDetector(
-                          onTap: () {
-                            onTapBackTwo();
-                          },
-                          child: Container(
-                              height: 28.v,
-                              width: 32.h,
-                              margin: EdgeInsets.only(left: 16.h),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 3.h, vertical: 2.v),
-                              decoration: AppDecoration.outlinePrimary5
-                                  .copyWith(
-                                      borderRadius:
-                                          BorderRadiusStyle.roundedBorder8),
-                              child: CustomImageView(
-                                  imagePath: ImageConstant.imgGroup27,
-                                  height: 20.adaptSize,
-                                  width: 20.adaptSize,
-                                  alignment: Alignment.centerLeft)))
+                        onTap: () {
+                          onTapBackTwo();
+                        },
+                        child: Container(
+                          height: 28.v,
+                          width: 32.h,
+                          margin: EdgeInsets.only(left: 16.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 3.h, vertical: 2.v),
+                          decoration: AppDecoration.outlinePrimary5.copyWith(
+                              borderRadius: BorderRadiusStyle.roundedBorder8),
+                          child: CustomImageView(
+                            imagePath: ImageConstant.imgGroup27,
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                            alignment: Alignment.centerLeft,
+                          ),
+                        ),
+                      ),
                     ]))));
   }
 

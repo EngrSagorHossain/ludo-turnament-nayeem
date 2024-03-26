@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:ludu_365/core/app_export.dart' hide FormData, MultipartFile;
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
@@ -21,6 +22,8 @@ class AuthController extends GetxController {
   final _dio = Dio();
 
   late StreamingSharedPreferences preferences;
+  //Play Audio
+  final player1 = AudioPlayer();
 
   //SignOut
   void tryToSignOut() async {
@@ -356,6 +359,9 @@ class AuthController extends GetxController {
   }
 
   void initialize() async {
+    await player1.setAsset('assets/audios/ludo_king.mp3');
+    await player1.play();
+    await player1.setLoopMode(LoopMode.one);
     preferences = await StreamingSharedPreferences.instance;
     preferences.getString('token', defaultValue: '').listen((value) {
       token.value = value;

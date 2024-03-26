@@ -1,8 +1,9 @@
-import 'controller/pass_n_play_game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/widgets/custom_icon_button.dart';
 import 'package:ludu_365/widgets/custom_switch.dart';
+
+import 'controller/pass_n_play_game_controller.dart';
 
 class PassNPlayGameScreen extends GetWidget<PassNPlayGameController> {
   const PassNPlayGameScreen({Key? key}) : super(key: key);
@@ -171,21 +172,42 @@ class PassNPlayGameScreen extends GetWidget<PassNPlayGameController> {
                         height: 30.adaptSize,
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 7.v)),
-                    SizedBox(
-                        height: 44.v,
-                        width: 46.h,
-                        child: Stack(alignment: Alignment.center, children: [
-                          CustomImageView(
-                              imagePath: ImageConstant.imgGroup6,
-                              height: 44.v,
-                              width: 46.h,
-                              alignment: Alignment.center),
-                          CustomImageView(
-                              imagePath: ImageConstant.imgDice22,
-                              height: 30.adaptSize,
-                              width: 30.adaptSize,
-                              alignment: Alignment.center)
-                        ]))
+                    InkWell(
+                      onTap: () {
+                        controller.diceController
+                            .startGeneratingRandomNumbers();
+                      },
+                      child: SizedBox(
+                          height: 44.v,
+                          width: 46.h,
+                          child: Stack(alignment: Alignment.center, children: [
+                            CustomImageView(
+                                imagePath: ImageConstant.imgGroup6,
+                                height: 44.v,
+                                width: 46.h,
+                                alignment: Alignment.center),
+                            Obx(() {
+                              return Transform.rotate(
+                                angle: controller
+                                        .diceController.randomNumber.value *
+                                    60 *
+                                    (3.14159265359 / 180),
+                                child: CustomImageView(
+                                  imagePath:
+                                      'assets/images/dices/${controller.diceController.randomNumber.value}.png',
+                                  height: 30.adaptSize,
+                                  width: 30.adaptSize,
+                                  alignment: Alignment.center,
+                                ),
+                              );
+                            })
+                            // CustomImageView(
+                            //     imagePath: ImageConstant.imgDice22,
+                            //     height: 30.adaptSize,
+                            //     width: 30.adaptSize,
+                            //     alignment: Alignment.center)
+                          ])),
+                    )
                   ])),
           Obx(() => CustomSwitch(
               value: controller.isSelectedSwitch.value,

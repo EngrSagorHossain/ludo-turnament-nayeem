@@ -17,6 +17,7 @@ dependencies:
   streaming_shared_preferences: ^2.0.0
   image_picker: ^1.0.7
   fluttertoast: ^8.2.4
+  just_audio: ^0.9.36
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
@@ -25,7 +26,9 @@ flutter:
   assets: 
     - assets/
     - assets/images/
-  fonts: 
+    - assets/audios/
+    - assets/images/dices/
+  fonts:
     - family: Roboto
       fonts: 
         - asset: assets/fonts/RobotoRomanRegular.ttf
