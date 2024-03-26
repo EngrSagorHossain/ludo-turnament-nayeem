@@ -1,4 +1,5 @@
-const String kDomain = "http://10.0.2.2:8000";
+// const String kDomain = "http://10.0.2.2:8000";
+const String kDomain = "https://ludotournament.sheikhit.net";
 const String basUrl = "$kDomain/api";
 const String kPackageList = "$basUrl/pack-id-category";
 String kCategory({required int packId}) => "$basUrl/pack-id-category/$packId";

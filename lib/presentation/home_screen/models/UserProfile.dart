@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-/// user : {"id":1,"role_id":1,"name":"nayeem","image":"sdfsadf","phone":"01941949288","username":"nayeem","address":"alksdfksadf","rating":"120","level":"20","total_wins":"320","total_coins":"2130","email":"nayeem@gmail.com","avatar":"users/default.png"}
-/// token : "2|PFni5CUUNIxXtfsp9xwZAtm1QQE2jpF8yQY1EnVOfd8d69c9"
+/// user : {"id":1,"role_id":"1","name":"sagor","image":"image/HLRGWkWcGE0m3e0rfNqXiJHfwGTXCr5ArGOUZ83n.png","phone":"01941949255","username":"sagor","address":"dfsadf","rating":"0","level":"0","total_wins":"0","total_coins":"0","email":"sagor@gmail.com","avatar":"users/default.png","created_at":"2024-03-26T20:52:21.000000Z","updated_at":"2024-03-26T20:52:21.000000Z"}
+/// token : "6|2wYLz7xRzJ7yFQA8LHq9Sli0Q6rZhPL7kKYk9CCC2a80125e"
 
 UserProfile userProfileFromJson(String str) =>
     UserProfile.fromJson(json.decode(str));
@@ -44,18 +44,20 @@ class UserProfile {
 }
 
 /// id : 1
-/// role_id : 1
-/// name : "nayeem"
-/// image : "sdfsadf"
-/// phone : "01941949288"
-/// username : "nayeem"
-/// address : "alksdfksadf"
-/// rating : "120"
-/// level : "20"
-/// total_wins : "320"
-/// total_coins : "2130"
-/// email : "nayeem@gmail.com"
+/// role_id : "1"
+/// name : "sagor"
+/// image : "image/HLRGWkWcGE0m3e0rfNqXiJHfwGTXCr5ArGOUZ83n.png"
+/// phone : "01941949255"
+/// username : "sagor"
+/// address : "dfsadf"
+/// rating : "0"
+/// level : "0"
+/// total_wins : "0"
+/// total_coins : "0"
+/// email : "sagor@gmail.com"
 /// avatar : "users/default.png"
+/// created_at : "2024-03-26T20:52:21.000000Z"
+/// updated_at : "2024-03-26T20:52:21.000000Z"
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
@@ -63,7 +65,7 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   User({
     num? id,
-    num? roleId,
+    String? roleId,
     String? name,
     String? image,
     String? phone,
@@ -75,6 +77,8 @@ class User {
     String? totalCoins,
     String? email,
     String? avatar,
+    String? createdAt,
+    String? updatedAt,
   }) {
     _id = id;
     _roleId = roleId;
@@ -89,6 +93,8 @@ class User {
     _totalCoins = totalCoins;
     _email = email;
     _avatar = avatar;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
   }
 
   User.fromJson(dynamic json) {
@@ -105,9 +111,11 @@ class User {
     _totalCoins = json['total_coins'];
     _email = json['email'];
     _avatar = json['avatar'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
   }
   num? _id;
-  num? _roleId;
+  String? _roleId;
   String? _name;
   String? _image;
   String? _phone;
@@ -119,9 +127,11 @@ class User {
   String? _totalCoins;
   String? _email;
   String? _avatar;
+  String? _createdAt;
+  String? _updatedAt;
   User copyWith({
     num? id,
-    num? roleId,
+    String? roleId,
     String? name,
     String? image,
     String? phone,
@@ -133,6 +143,8 @@ class User {
     String? totalCoins,
     String? email,
     String? avatar,
+    String? createdAt,
+    String? updatedAt,
   }) =>
       User(
         id: id ?? _id,
@@ -148,9 +160,11 @@ class User {
         totalCoins: totalCoins ?? _totalCoins,
         email: email ?? _email,
         avatar: avatar ?? _avatar,
+        createdAt: createdAt ?? _createdAt,
+        updatedAt: updatedAt ?? _updatedAt,
       );
   num? get id => _id;
-  num? get roleId => _roleId;
+  String? get roleId => _roleId;
   String? get name => _name;
   String? get image => _image;
   String? get phone => _phone;
@@ -162,6 +176,8 @@ class User {
   String? get totalCoins => _totalCoins;
   String? get email => _email;
   String? get avatar => _avatar;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -178,6 +194,8 @@ class User {
     map['total_coins'] = _totalCoins;
     map['email'] = _email;
     map['avatar'] = _avatar;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
     return map;
   }
 }

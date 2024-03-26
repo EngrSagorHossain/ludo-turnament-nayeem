@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/presentation/payment_method_screen/controller/payment_method_controller.dart';
 import 'package:ludu_365/widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -22,65 +24,76 @@ class PaymentSubmitScreen extends GetWidget<PaymentMethodController> {
         child: Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(),
-      body: SizedBox(
-        width: SizeUtils.width,
-        child: Form(
-          // key: _formKey,
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: 18.h, vertical: 7.v),
-            child: Column(
-              children: [
-                SizedBox(height: 31.v),
-                Text(
-                  "${controller.methodName.value} Account No:",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+      body: Obx(() {
+        return LoadingOverlay(
+          opacity: 0.1,
+          isLoading: controller.isLoading.value,
+          progressIndicator: SpinKitSpinningLines(
+            color: Colors.yellow,
+            size: 40,
+          ),
+          child: SizedBox(
+            width: SizeUtils.width,
+            child: Form(
+              // key: _formKey,
+              child: Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.symmetric(horizontal: 18.h, vertical: 7.v),
+                child: Column(
                   children: [
+                    SizedBox(height: 31.v),
                     Text(
-                      "+880194194545",
-                      style: TextStyle(fontSize: 20, color: Colors.yellow),
+                      "${controller.methodName.value} Account No:",
+                      style: TextStyle(fontSize: 20),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.content_copy,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        String accountNumber =
-                            "+880194194545"; // Replace with your actual account number
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "+880194194545",
+                          style: TextStyle(fontSize: 20, color: Colors.yellow),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.content_copy,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            String accountNumber =
+                                "+880194194545"; // Replace with your actual account number
 
-                        Clipboard.setData(ClipboardData(text: accountNumber))
-                            .then((_) {
-                          Fluttertoast.showToast(
-                            msg: "Account number copied to clipboard",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.grey,
-                            textColor: Colors.white,
-                          );
-                        });
-                      },
+                            Clipboard.setData(
+                                    ClipboardData(text: accountNumber))
+                                .then((_) {
+                              Fluttertoast.showToast(
+                                msg: "Account number copied to clipboard",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                backgroundColor: Colors.grey,
+                                textColor: Colors.white,
+                              );
+                            });
+                          },
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 22.v),
+                    _buildPhoneNumberEditText(),
+                    SizedBox(height: 22.v),
+                    _buildTransactionAmountEditText(),
+                    SizedBox(height: 22.v),
+                    _buildTransactionIdEditText(),
+                    Spacer(),
+                    SizedBox(height: 27.v),
+                    _buildNextButton()
                   ],
                 ),
-                SizedBox(height: 22.v),
-                _buildPhoneNumberEditText(),
-                SizedBox(height: 22.v),
-                _buildTransactionAmountEditText(),
-                SizedBox(height: 22.v),
-                _buildTransactionIdEditText(),
-                Spacer(),
-                SizedBox(height: 27.v),
-                _buildNextButton()
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     ));
   }
 
@@ -143,7 +156,7 @@ class PaymentSubmitScreen extends GetWidget<PaymentMethodController> {
     return CustomTextFormField(
         width: 200.h,
         controller: controller.transactionIAmountController,
-        hintText: "Transaction amount".tr,
+        hintText: " Amount".tr,
         textInputAction: TextInputAction.done);
   }
 

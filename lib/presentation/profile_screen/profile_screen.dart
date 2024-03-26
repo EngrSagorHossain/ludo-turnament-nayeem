@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/core/utils/validation_functions.dart';
 import 'package:ludu_365/presentation/profile_two_dialog/controller/profile_two_controller.dart';
@@ -23,41 +25,52 @@ class ProfileScreen extends GetWidget<ProfileController> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _buildAppBar(),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Form(
-              key: _formKey,
-              child: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 28.v),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _buildUsernameRow(),
-                    SizedBox(height: 23.v),
-                    _buildPasswordRow(),
-                    SizedBox(height: 40.v),
-                    CustomElevatedButton(
-                        width: 94.h,
-                        text: "lbl_login".tr,
-                        margin: EdgeInsets.only(right: 107.h),
-                        onPressed: () {
-                          controller.authController.tryToSignIn(
-                            userName: controller.userNameController.text,
-                            password: controller.passwordController.text,
-                          );
-                          // onTapLogin();
-                        }),
-                    SizedBox(height: 5.v)
-                  ],
+        body: Obx(() {
+          return LoadingOverlay(
+            opacity: 0.1,
+            isLoading: controller.authController.isLoading.value,
+            progressIndicator: SpinKitSpinningLines(
+              color: Colors.yellow,
+              size: 40,
+            ),
+            child: SizedBox(
+              width: SizeUtils.width,
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Form(
+                  key: _formKey,
+                  child: Container(
+                    width: double.maxFinite,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 17.h, vertical: 28.v),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _buildUsernameRow(),
+                        SizedBox(height: 23.v),
+                        _buildPasswordRow(),
+                        SizedBox(height: 40.v),
+                        CustomElevatedButton(
+                            width: 94.h,
+                            text: "lbl_login".tr,
+                            margin: EdgeInsets.only(right: 107.h),
+                            onPressed: () {
+                              controller.authController.tryToSignIn(
+                                userName: controller.userNameController.text,
+                                password: controller.passwordController.text,
+                              );
+                              // onTapLogin();
+                            }),
+                        SizedBox(height: 5.v)
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

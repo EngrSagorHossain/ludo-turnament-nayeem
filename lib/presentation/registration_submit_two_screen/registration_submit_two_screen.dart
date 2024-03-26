@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/core/utils/validation_functions.dart';
 import 'package:ludu_365/widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -22,29 +24,40 @@ class RegistrationSubmitTwoScreen
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _buildAppBar(),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: Form(
-            key: _formKey,
-            child: Container(
-              width: double.maxFinite,
-              padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 25.v),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  _buildUsernameRow1(),
-                  SizedBox(height: 23.v),
-                  _buildPasswordRow1(),
-                  SizedBox(height: 23.v),
-                  _buildConfirmPasswordRow1(),
-                  Spacer(),
-                  SizedBox(height: 9.v),
-                  _buildSubmitButton()
-                ],
+        body: Obx(() {
+          return LoadingOverlay(
+            opacity: 0.1,
+            isLoading: controller.authController.isLoading.value,
+            progressIndicator: SpinKitSpinningLines(
+              color: Colors.yellow,
+              size: 40,
+            ),
+            child: SizedBox(
+              width: SizeUtils.width,
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 17.h, vertical: 25.v),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      _buildUsernameRow1(),
+                      SizedBox(height: 23.v),
+                      _buildPasswordRow1(),
+                      SizedBox(height: 23.v),
+                      _buildConfirmPasswordRow1(),
+                      Spacer(),
+                      SizedBox(height: 9.v),
+                      _buildSubmitButton()
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

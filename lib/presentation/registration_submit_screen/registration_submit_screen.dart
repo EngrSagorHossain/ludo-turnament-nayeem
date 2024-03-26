@@ -20,51 +20,51 @@ class RegistrationSubmitScreen extends GetWidget<RegistrationSubmitController> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(),
-            body: Obx(() {
-              return SizedBox(
-                  width: SizeUtils.width,
-                  child: Form(
-                      key: _formKey,
-                      child: Container(
-                          width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18.h, vertical: 7.v),
-                          child: Column(children: [
-                            CustomIconButton(
-                              onTap: () {
-                                controller.authController.pickImage();
-                              },
-                              height: 70.adaptSize,
-                              width: 70.adaptSize,
-                              padding: EdgeInsets.all(25.h),
-                              decoration: IconButtonStyleHelper.fillGray,
-                              child:
-                                  controller.authController.image.value != null
-                                      ? CustomImageView(
-                                          imagePath: controller
-                                              .authController.image.value!.path,
-                                        ) // Display picked image
-                                      : CustomImageView(
-                                          imagePath: ImageConstant.imgGroup95,
-                                        ), // Display placeholder image
-                            ),
-                            SizedBox(height: 31.v),
-                            _buildNameEditText(),
-                            SizedBox(height: 23.v),
-                            _buildAddressEditText(),
-                            SizedBox(height: 24.v),
-                            _buildEmailEditText(),
-                            SizedBox(height: 24.v),
-                            _buildPhoneNumberEditText(),
-                            SizedBox(height: 22.v),
-                            _buildTransactionIdEditText(),
-                            Spacer(),
-                            SizedBox(height: 27.v),
-                            _buildNextButton()
-                          ]))));
-            })));
+      resizeToAvoidBottomInset: false,
+      appBar: _buildAppBar(),
+      body: SizedBox(
+          width: SizeUtils.width,
+          child: Form(
+              key: _formKey,
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.h, vertical: 7.v),
+                  child: Obx(() {
+                    return Column(children: [
+                      CustomIconButton(
+                        onTap: () {
+                          controller.authController.pickImage();
+                        },
+                        height: 70.adaptSize,
+                        width: 70.adaptSize,
+                        padding: EdgeInsets.all(25.h),
+                        decoration: IconButtonStyleHelper.fillGray,
+                        child: controller.authController.image.value != null
+                            ? CustomImageView(
+                                imagePath:
+                                    controller.authController.image.value!.path,
+                              ) // Display picked image
+                            : CustomImageView(
+                                imagePath: ImageConstant.imgGroup95,
+                              ), // Display placeholder image
+                      ),
+                      SizedBox(height: 31.v),
+                      _buildNameEditText(),
+                      SizedBox(height: 23.v),
+                      _buildAddressEditText(),
+                      SizedBox(height: 24.v),
+                      _buildEmailEditText(),
+                      SizedBox(height: 24.v),
+                      _buildPhoneNumberEditText(),
+                      SizedBox(height: 22.v),
+                      _buildTransactionIdEditText(),
+                      Spacer(),
+                      SizedBox(height: 27.v),
+                      _buildNextButton()
+                    ]);
+                  })))),
+    ));
   }
 
   /// Section Widget
