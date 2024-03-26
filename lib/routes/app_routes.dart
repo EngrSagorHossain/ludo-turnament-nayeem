@@ -1,58 +1,58 @@
-import 'package:ludu_365/presentation/exit_three_screen/binding/exit_three_binding.dart';
-import 'package:ludu_365/presentation/exit_three_screen/exit_three_screen.dart';
-import 'package:ludu_365/presentation/pass_n_play_screen/controller/pass_n_play_controller.dart';
-import 'package:ludu_365/presentation/splash_screen/splash_screen.dart';
-// ignore: unused_import
-import 'package:ludu_365/presentation/bottom_navigation_screen/bottom_navigation_screen.dart';
-import 'package:ludu_365/presentation/splash_screen/binding/splash_binding.dart';
-import 'package:ludu_365/presentation/profile_screen/profile_screen.dart';
-import 'package:ludu_365/presentation/profile_screen/binding/profile_binding.dart';
-import 'package:ludu_365/presentation/notifications_screen/notifications_screen.dart';
-import 'package:ludu_365/presentation/notifications_screen/binding/notifications_binding.dart';
-import 'package:ludu_365/presentation/payments_or_registration_screen/payments_or_registration_screen.dart';
-import 'package:ludu_365/presentation/payments_or_registration_screen/binding/payments_or_registration_binding.dart';
-import 'package:ludu_365/presentation/payment_method_screen/payment_method_screen.dart';
-import 'package:ludu_365/presentation/payment_method_screen/binding/payment_method_binding.dart';
-import 'package:ludu_365/presentation/registration_submit_screen/registration_submit_screen.dart';
-import 'package:ludu_365/presentation/registration_submit_screen/binding/registration_submit_binding.dart';
-import 'package:ludu_365/presentation/registration_submit_two_screen/registration_submit_two_screen.dart';
-import 'package:ludu_365/presentation/registration_submit_two_screen/binding/registration_submit_two_binding.dart';
-import 'package:ludu_365/presentation/computer_screen/computer_screen.dart';
-import 'package:ludu_365/presentation/computer_screen/binding/computer_binding.dart';
-import 'package:ludu_365/presentation/computer_game_screen/computer_game_screen.dart';
-import 'package:ludu_365/presentation/computer_game_screen/binding/computer_game_binding.dart';
-import 'package:ludu_365/presentation/exit_screen/exit_screen.dart';
-import 'package:ludu_365/presentation/exit_screen/binding/exit_binding.dart';
-import 'package:ludu_365/presentation/rate_us_screen/rate_us_screen.dart';
-import 'package:ludu_365/presentation/rate_us_screen/binding/rate_us_binding.dart';
-import 'package:ludu_365/presentation/home_screen/home_screen.dart';
-import 'package:ludu_365/presentation/home_screen/binding/home_binding.dart';
-import 'package:ludu_365/presentation/contract_screen/contract_screen.dart';
-import 'package:ludu_365/presentation/contract_screen/binding/contract_binding.dart';
-import 'package:ludu_365/presentation/pass_n_play_screen/pass_n_play_screen.dart';
-import 'package:ludu_365/presentation/pass_n_play_screen/binding/pass_n_play_binding.dart';
-import 'package:ludu_365/presentation/pass_n_play_game_screen/pass_n_play_game_screen.dart';
-import 'package:ludu_365/presentation/pass_n_play_game_screen/binding/pass_n_play_game_binding.dart';
-import 'package:ludu_365/presentation/exit_one_screen/exit_one_screen.dart';
-import 'package:ludu_365/presentation/exit_one_screen/binding/exit_one_binding.dart';
-import 'package:ludu_365/presentation/tournament_screen/tournament_screen.dart';
-import 'package:ludu_365/presentation/tournament_screen/binding/tournament_binding.dart';
-import 'package:ludu_365/presentation/tournament_three_screen/tournament_three_screen.dart';
-import 'package:ludu_365/presentation/tournament_three_screen/binding/tournament_three_binding.dart';
-import 'package:ludu_365/presentation/tournament_four_screen/tournament_four_screen.dart';
-import 'package:ludu_365/presentation/tournament_four_screen/binding/tournament_four_binding.dart';
-import 'package:ludu_365/presentation/tournament_five_screen/tournament_five_screen.dart';
-import 'package:ludu_365/presentation/tournament_five_screen/binding/tournament_five_binding.dart';
-import 'package:ludu_365/presentation/tournament_six_screen/tournament_six_screen.dart';
-import 'package:ludu_365/presentation/tournament_six_screen/binding/tournament_six_binding.dart';
-import 'package:ludu_365/presentation/tournament_game_screen/tournament_game_screen.dart';
-import 'package:ludu_365/presentation/tournament_game_screen/binding/tournament_game_binding.dart';
-import 'package:ludu_365/presentation/exit_two_screen/exit_two_screen.dart';
-import 'package:ludu_365/presentation/exit_two_screen/binding/exit_two_binding.dart';
+import 'package:get/get.dart';
 import 'package:ludu_365/presentation/app_navigation_screen/app_navigation_screen.dart';
 import 'package:ludu_365/presentation/app_navigation_screen/binding/app_navigation_binding.dart';
-import 'package:get/get.dart';
-
+// ignore: unused_import
+import 'package:ludu_365/presentation/bottom_navigation_screen/bottom_navigation_screen.dart';
+import 'package:ludu_365/presentation/computer_game_screen/binding/computer_game_binding.dart';
+import 'package:ludu_365/presentation/computer_game_screen/computer_game_screen.dart';
+import 'package:ludu_365/presentation/computer_screen/binding/computer_binding.dart';
+import 'package:ludu_365/presentation/computer_screen/computer_screen.dart';
+import 'package:ludu_365/presentation/contract_screen/binding/contract_binding.dart';
+import 'package:ludu_365/presentation/contract_screen/contract_screen.dart';
+import 'package:ludu_365/presentation/exit_one_screen/binding/exit_one_binding.dart';
+import 'package:ludu_365/presentation/exit_one_screen/exit_one_screen.dart';
+import 'package:ludu_365/presentation/exit_screen/binding/exit_binding.dart';
+import 'package:ludu_365/presentation/exit_screen/exit_screen.dart';
+import 'package:ludu_365/presentation/exit_three_screen/binding/exit_three_binding.dart';
+import 'package:ludu_365/presentation/exit_three_screen/exit_three_screen.dart';
+import 'package:ludu_365/presentation/exit_two_screen/binding/exit_two_binding.dart';
+import 'package:ludu_365/presentation/exit_two_screen/exit_two_screen.dart';
+import 'package:ludu_365/presentation/home_screen/binding/home_binding.dart';
+import 'package:ludu_365/presentation/home_screen/home_screen.dart';
+import 'package:ludu_365/presentation/notifications_screen/binding/notifications_binding.dart';
+import 'package:ludu_365/presentation/notifications_screen/notifications_screen.dart';
+import 'package:ludu_365/presentation/pass_n_play_game_screen/binding/pass_n_play_game_binding.dart';
+import 'package:ludu_365/presentation/pass_n_play_game_screen/pass_n_play_game_screen.dart';
+import 'package:ludu_365/presentation/pass_n_play_screen/binding/pass_n_play_binding.dart';
+import 'package:ludu_365/presentation/pass_n_play_screen/controller/pass_n_play_controller.dart';
+import 'package:ludu_365/presentation/pass_n_play_screen/pass_n_play_screen.dart';
+import 'package:ludu_365/presentation/payment_method_screen/binding/payment_method_binding.dart';
+import 'package:ludu_365/presentation/payment_method_screen/payment_method_screen.dart';
+import 'package:ludu_365/presentation/payment_method_screen/payment_submit_screen.dart';
+import 'package:ludu_365/presentation/payments_or_registration_screen/binding/payments_or_registration_binding.dart';
+import 'package:ludu_365/presentation/payments_or_registration_screen/payments_or_registration_screen.dart';
+import 'package:ludu_365/presentation/profile_screen/binding/profile_binding.dart';
+import 'package:ludu_365/presentation/profile_screen/profile_screen.dart';
+import 'package:ludu_365/presentation/rate_us_screen/binding/rate_us_binding.dart';
+import 'package:ludu_365/presentation/rate_us_screen/rate_us_screen.dart';
+import 'package:ludu_365/presentation/registration_submit_screen/binding/registration_submit_binding.dart';
+import 'package:ludu_365/presentation/registration_submit_screen/registration_submit_screen.dart';
+import 'package:ludu_365/presentation/registration_submit_two_screen/binding/registration_submit_two_binding.dart';
+import 'package:ludu_365/presentation/registration_submit_two_screen/registration_submit_two_screen.dart';
+import 'package:ludu_365/presentation/splash_screen/binding/splash_binding.dart';
+import 'package:ludu_365/presentation/splash_screen/splash_screen.dart';
+import 'package:ludu_365/presentation/tournament_five_screen/binding/tournament_five_binding.dart';
+import 'package:ludu_365/presentation/tournament_five_screen/tournament_five_screen.dart';
+import 'package:ludu_365/presentation/tournament_four_screen/binding/tournament_four_binding.dart';
+import 'package:ludu_365/presentation/tournament_four_screen/tournament_four_screen.dart';
+import 'package:ludu_365/presentation/tournament_game_screen/binding/tournament_game_binding.dart';
+import 'package:ludu_365/presentation/tournament_game_screen/tournament_game_screen.dart';
+import 'package:ludu_365/presentation/tournament_screen/binding/tournament_binding.dart';
+import 'package:ludu_365/presentation/tournament_screen/tournament_screen.dart';
+import 'package:ludu_365/presentation/tournament_six_screen/binding/tournament_six_binding.dart';
+import 'package:ludu_365/presentation/tournament_six_screen/tournament_six_screen.dart';
+import 'package:ludu_365/presentation/tournament_three_screen/binding/tournament_three_binding.dart';
+import 'package:ludu_365/presentation/tournament_three_screen/tournament_three_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -65,6 +65,7 @@ class AppRoutes {
       '/payments_or_registration_screen';
 
   static const String paymentMethodScreen = '/payment_method_screen';
+  static const String paymentSubmitScreen = '/payment_submit_screen';
 
   static const String registrationSubmitScreen = '/registration_submit_screen';
 
@@ -145,6 +146,14 @@ class AppRoutes {
     GetPage(
       name: paymentMethodScreen,
       page: () => PaymentMethodScreen(),
+      bindings: [
+        PaymentMethodBinding(),
+      ],
+    ),
+
+    GetPage(
+      name: paymentSubmitScreen,
+      page: () => PaymentSubmitScreen(),
       bindings: [
         PaymentMethodBinding(),
       ],

@@ -11,3 +11,6 @@ const String kRegister = "$basUrl/register";
 const String kLogin = "$basUrl/login";
 const String kLogout = "$basUrl/logout";
 const String kUpdateProfile = "$basUrl/profile-update";
+
+//Tournament Related
+const String kTournamentRegister = "$basUrl/tournament-register";

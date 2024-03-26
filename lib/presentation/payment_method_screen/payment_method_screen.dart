@@ -1,12 +1,11 @@
-import 'package:ludu_365/widgets/custom_outlined_button_forcontract.dart';
-
-import 'controller/payment_method_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ludu_365/core/app_export.dart';
 import 'package:ludu_365/widgets/app_bar/appbar_leading_iconbutton.dart';
 import 'package:ludu_365/widgets/app_bar/appbar_title.dart';
 import 'package:ludu_365/widgets/app_bar/custom_app_bar.dart';
-import 'package:ludu_365/widgets/custom_outlined_button.dart';
+import 'package:ludu_365/widgets/custom_outlined_button_forcontract.dart';
+
+import 'controller/payment_method_controller.dart';
 
 class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   const PaymentMethodScreen({Key? key}) : super(key: key);
@@ -52,6 +51,10 @@ class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   /// Section Widget
   Widget _buildBKashButton() {
     return CustomOutlinedButtonContract(
+        onPressed: () {
+          controller.methodName.value = "bKash";
+          Get.toNamed(AppRoutes.paymentSubmitScreen);
+        },
         height: 43.v,
         text: "lbl_bkash".tr,
         margin: EdgeInsets.only(left: 10.h),
@@ -73,6 +76,10 @@ class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   /// Section Widget
   Widget _buildNagadButton() {
     return CustomOutlinedButtonContract(
+        onPressed: () {
+          controller.methodName.value = "Nagad";
+          Get.toNamed(AppRoutes.paymentSubmitScreen);
+        },
         height: 43.v,
         text: "lbl_nagad".tr,
         margin: EdgeInsets.only(left: 10.h),
@@ -94,6 +101,10 @@ class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   /// Section Widget
   Widget _buildRocketButton() {
     return CustomOutlinedButtonContract(
+        onPressed: () {
+          controller.methodName.value = "Rocket";
+          Get.toNamed(AppRoutes.paymentSubmitScreen);
+        },
         height: 43.v,
         text: "lbl_rocket".tr,
         margin: EdgeInsets.only(left: 10.h),
@@ -115,8 +126,12 @@ class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   /// Section Widget
   Widget _buildDutchBanglaButton() {
     return CustomOutlinedButtonContract(
+        onPressed: () {
+          controller.methodName.value = "Dutch Bangla Bank";
+          Get.toNamed(AppRoutes.paymentSubmitScreen);
+        },
         height: 43.v,
-        text: "lbl_dutch_bangla".tr, 
+        text: "lbl_dutch_bangla".tr,
         margin: EdgeInsets.only(left: 10.h),
         leftIcon: Container(
             padding: EdgeInsets.fromLTRB(8.h, 3.v, 10.h, 4.v),
@@ -137,6 +152,10 @@ class PaymentMethodScreen extends GetWidget<PaymentMethodController> {
   /// Section Widget
   Widget _buildVisaCardButton() {
     return CustomOutlinedButtonContract(
+        onPressed: () {
+          controller.methodName.value = "Visa Card";
+          Get.toNamed(AppRoutes.paymentSubmitScreen);
+        },
         height: 43.v,
         text: "lbl_visa_card".tr,
         margin: EdgeInsets.only(left: 10.h),
