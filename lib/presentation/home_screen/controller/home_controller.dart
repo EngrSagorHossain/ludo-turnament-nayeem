@@ -7,4 +7,8 @@ import 'package:ludu_365/presentation/home_screen/models/home_model.dart';
 /// current homeModelObj
 class HomeController extends GetxController {
   Rx<HomeModel> homeModelObj = HomeModel().obs;
+
+
+
+
 }

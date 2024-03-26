@@ -105,6 +105,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      sha256: "50fec96118958b97c727d0d8f67255d3683f16cc1f90d9bc917b5d4fe3abeca9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.2"
   fake_async:
     dependency: transitive
     description:
@@ -485,6 +493,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  streaming_shared_preferences:
+    dependency: "direct main"
+    description:
+      name: streaming_shared_preferences
+      sha256: "015a7999d8cf6e87a685635e0614910116ee187c885ae0f630da276f8435e457"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
