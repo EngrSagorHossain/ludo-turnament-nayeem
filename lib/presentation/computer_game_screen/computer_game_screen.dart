@@ -121,11 +121,83 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
         height: 360.adaptSize,
         width: double.maxFinite,
         child: Stack(alignment: Alignment.center, children: [
-          CustomImageView(
-              imagePath: ImageConstant.img360F494282200,
-              height: 360.adaptSize,
-              width: 360.adaptSize,
-              alignment: Alignment.center),
+          Obx(() {
+            return Stack(
+              children: [
+                CustomImageView(
+                    imagePath: ImageConstant.img360F494282200,
+                    height: 360.adaptSize,
+                    width: 360.adaptSize,
+                    alignment: Alignment.center),
+                //pointer logic and view added start from here
+
+                //for player 1
+
+                PositionPointer(
+                  left: controller.positionListOfBox[0]['left'].toString(),
+                  bottom: controller.positionListOfBox[0]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags2,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[1]['left'].toString(),
+                  bottom: controller.positionListOfBox[1]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags2,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[2]['left'].toString(),
+                  bottom: controller.positionListOfBox[2]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags2,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[3]['left'].toString(),
+                  bottom: controller.positionListOfBox[3]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags2,
+                ),
+                //player 2
+                PositionPointer(
+                  left: controller.positionListOfBox[4]['left'].toString(),
+                  bottom: controller.positionListOfBox[4]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags140x40,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[5]['left'].toString(),
+                  bottom: controller.positionListOfBox[5]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags140x40,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[6]['left'].toString(),
+                  bottom: controller.positionListOfBox[6]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags140x40,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[7]['left'].toString(),
+                  bottom: controller.positionListOfBox[7]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags140x40,
+                ),
+                //player 3
+                PositionPointer(
+                  left: controller.positionListOfBox[8]['left'].toString(),
+                  bottom: controller.positionListOfBox[8]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[9]['left'].toString(),
+                  bottom: controller.positionListOfBox[9]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[10]['left'].toString(),
+                  bottom: controller.positionListOfBox[10]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[11]['left'].toString(),
+                  bottom: controller.positionListOfBox[11]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+              ],
+            );
+          }),
           Align(
               alignment: Alignment.center,
               child: Padding(
@@ -133,13 +205,20 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
                     Align(
                         alignment: Alignment.centerRight,
-                        child: Text("lbl_player_1".tr,
-                            style: theme.textTheme.labelLarge)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("lbl_player_2".tr,
+                                style: theme.textTheme.labelLarge),
+                            Text("lbl_player_3".tr,
+                                style: theme.textTheme.labelLarge),
+                          ],
+                        )),
                     SizedBox(height: 318.v),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("lbl_player_2".tr,
+                          Text("lbl_player_1".tr,
                               style: theme.textTheme.labelLarge),
                           Text("lbl_player_4".tr,
                               style: theme.textTheme.labelLarge)
@@ -152,6 +231,31 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
   onTapBackTwo() {
     Get.toNamed(
       AppRoutes.exitScreen,
+    );
+  }
+}
+
+class PositionPointer extends StatelessWidget {
+  PositionPointer({
+    Key? key,
+    required this.left,
+    required this.bottom,
+    required this.imagePath,
+  }) : super(key: key);
+  String? left;
+  String? bottom;
+  String? imagePath;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: double.parse(left!),
+      bottom: double.parse(bottom!),
+      child: CustomImageView(
+        imagePath: imagePath,
+        height: 32,
+        width: 32,
+      ),
     );
   }
 }

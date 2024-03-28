@@ -30,6 +30,7 @@ flutter:
     - assets/images/
     - assets/audios/
     - assets/images/dices/
+    - assets/ludo_pointer/
   fonts:
     - family: Roboto
       fonts: 
