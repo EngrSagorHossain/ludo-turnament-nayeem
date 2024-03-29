@@ -195,6 +195,33 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                   bottom: controller.positionListOfBox[11]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                 ),
+                //Player 4
+                PositionPointer(
+                  left: controller.positionListOfBox[12]['left'].toString(),
+                  bottom: controller.positionListOfBox[12]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[13]['left'].toString(),
+                  bottom: controller.positionListOfBox[13]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[14]['left'].toString(),
+                  bottom: controller.positionListOfBox[14]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                PositionPointer(
+                  left: controller.positionListOfBox[15]['left'].toString(),
+                  bottom: controller.positionListOfBox[15]['bottom'].toString(),
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
+                //for all others box
+                PositionPointer(
+                  left: '156',
+                  bottom: '30',
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                ),
               ],
             );
           }),

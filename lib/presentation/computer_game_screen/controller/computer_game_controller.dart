@@ -79,16 +79,26 @@ class ComputerGameController extends GetxController {
     {'pointer': 'a3', 'left': 48, 'bottom': 48, 'coteValue': 103},
     {'pointer': 'a4', 'left': 48, 'bottom': 89, 'coteValue': 104},
     //for boat 2 initial
-    {'pointer': 'a1', 'left': 91, 'bottom': 312, 'coteValue': 101},
-    {'pointer': 'a2', 'left': 91, 'bottom': 272, 'coteValue': 102},
-    {'pointer': 'a3', 'left': 48, 'bottom': 312, 'coteValue': 103},
-    {'pointer': 'a4', 'left': 48, 'bottom': 272, 'coteValue': 104},
+    {'pointer': 'b1', 'left': 91, 'bottom': 312, 'coteValue': 101},
+    {'pointer': 'b2', 'left': 91, 'bottom': 272, 'coteValue': 102},
+    {'pointer': 'b3', 'left': 48, 'bottom': 312, 'coteValue': 103},
+    {'pointer': 'b4', 'left': 48, 'bottom': 272, 'coteValue': 104},
      //for boat 3 initial
     {'pointer': 'c1', 'left': 270, 'bottom': 312, 'coteValue': 301},
     {'pointer': 'c2', 'left': 270, 'bottom': 272, 'coteValue': 302},
     {'pointer': 'c3', 'left': 314, 'bottom': 312, 'coteValue': 303},
     {'pointer': 'c4', 'left': 314, 'bottom': 272, 'coteValue': 304},
-
+     //for boat 4 initial
+    {'pointer': 'd1', 'left': 270, 'bottom': 91, 'coteValue': 301},
+    {'pointer': 'd2', 'left': 270, 'bottom': 48, 'coteValue': 302},
+    {'pointer': 'd3', 'left': 314, 'bottom': 91, 'coteValue': 303},
+    {'pointer': 'd4', 'left': 314, 'bottom': 48, 'coteValue': 304},
+    //
+   {'pointer': 'a4', 'left': 314, 'bottom': 48, 'coteValue': 132},
    
   ].obs;
+
+  final boxPointerList = [
+     {'coteValue': 132,'left': 314, 'bottom': 48, },
+  ];
 }
