@@ -118,9 +118,11 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
   /// Section Widget
   Widget _buildOneStack() {
     return SizedBox(
-        height: 360.adaptSize,
-        width: double.maxFinite,
-        child: Stack(alignment: Alignment.center, children: [
+      height: 360.adaptSize,
+      width: double.maxFinite,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
           Obx(() {
             return Stack(
               children: [
@@ -131,130 +133,209 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                     alignment: Alignment.center),
                 //pointer logic and view added start from here
 
-                //for player 1
-
+                // //for player 1
                 PositionPointer(
                   left: controller.positionListOfBox[0]['left'].toString(),
                   bottom: controller.positionListOfBox[0]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[0]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[1]['left'].toString(),
                   bottom: controller.positionListOfBox[1]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[1]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[2]['left'].toString(),
                   bottom: controller.positionListOfBox[2]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[2]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[3]['left'].toString(),
                   bottom: controller.positionListOfBox[3]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[3]['pointer']
+                            .toString());
+                  },
                 ),
                 //player 2
                 PositionPointer(
                   left: controller.positionListOfBox[4]['left'].toString(),
                   bottom: controller.positionListOfBox[4]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[4]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[5]['left'].toString(),
                   bottom: controller.positionListOfBox[5]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[5]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[6]['left'].toString(),
                   bottom: controller.positionListOfBox[6]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[6]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[7]['left'].toString(),
                   bottom: controller.positionListOfBox[7]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[7]['pointer']
+                            .toString());
+                  },
                 ),
                 //player 3
                 PositionPointer(
                   left: controller.positionListOfBox[8]['left'].toString(),
                   bottom: controller.positionListOfBox[8]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[8]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[9]['left'].toString(),
                   bottom: controller.positionListOfBox[9]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[9]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[10]['left'].toString(),
                   bottom: controller.positionListOfBox[10]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[10]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[11]['left'].toString(),
                   bottom: controller.positionListOfBox[11]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[11]['pointer']
+                            .toString());
+                  },
                 ),
                 //Player 4
                 PositionPointer(
                   left: controller.positionListOfBox[12]['left'].toString(),
                   bottom: controller.positionListOfBox[12]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[12]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[13]['left'].toString(),
                   bottom: controller.positionListOfBox[13]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[13]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[14]['left'].toString(),
                   bottom: controller.positionListOfBox[14]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[14]['pointer']
+                            .toString());
+                  },
                 ),
                 PositionPointer(
                   left: controller.positionListOfBox[15]['left'].toString(),
                   bottom: controller.positionListOfBox[15]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
-                ),
-                //for all others box
-                PositionPointer(
-                  left: '156',
-                  bottom: '30',
-                  imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfBox[15]['pointer']
+                            .toString());
+                  },
                 ),
               ],
             );
           }),
           Align(
-              alignment: Alignment.center,
-              child: Padding(
-                  padding: EdgeInsets.only(left: 48.h, right: 51.h),
-                  child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Align(
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("lbl_player_2".tr,
-                                style: theme.textTheme.labelLarge),
-                            Text("lbl_player_3".tr,
-                                style: theme.textTheme.labelLarge),
-                          ],
-                        )),
-                    SizedBox(height: 318.v),
-                    Row(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.only(left: 48.h, right: 51.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("lbl_player_1".tr,
+                          Text("lbl_player_2".tr,
                               style: theme.textTheme.labelLarge),
-                          Text("lbl_player_4".tr,
-                              style: theme.textTheme.labelLarge)
-                        ])
-                  ])))
-        ]));
+                          Text("lbl_player_3".tr,
+                              style: theme.textTheme.labelLarge),
+                        ],
+                      )),
+                  SizedBox(height: 318.v),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("lbl_player_1".tr,
+                          style: theme.textTheme.labelLarge),
+                      Text("lbl_player_4".tr, style: theme.textTheme.labelLarge)
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
-  /// Navigates to the exitScreen when the action is triggered.
   onTapBackTwo() {
     Get.toNamed(
       AppRoutes.exitScreen,
@@ -263,25 +344,30 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
 }
 
 class PositionPointer extends StatelessWidget {
-  PositionPointer({
-    Key? key,
-    required this.left,
-    required this.bottom,
-    required this.imagePath,
-  }) : super(key: key);
+  PositionPointer(
+      {Key? key,
+      required this.left,
+      required this.bottom,
+      required this.imagePath,
+      required this.onPress})
+      : super(key: key);
   String? left;
   String? bottom;
   String? imagePath;
+  VoidCallback onPress;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
       left: double.parse(left!),
       bottom: double.parse(bottom!),
-      child: CustomImageView(
-        imagePath: imagePath,
-        height: 32,
-        width: 32,
+      child: InkWell(
+        onTap: onPress,
+        child: CustomImageView(
+          imagePath: imagePath,
+          height: 32,
+          width: 32,
+        ),
       ),
     );
   }
