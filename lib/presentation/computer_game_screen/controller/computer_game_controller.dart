@@ -23,13 +23,11 @@ class ComputerGameController extends GetxController {
 
   //logic started
   void setPositionValueAndPointer({required String pointer}) {
-    print(pointer);
     positionListOfBox.forEach((player) {
       if (player['pointer'] == pointer) {
-        print(player);
         if (player['coteValue'] != null && player['coteValue'] is int) {
           int coteValue = player['coteValue'] as int;
-          print(coteValue);
+          // print(coteValue);
 
           if (coteValue > 100 && coteValue < 105) {
             player['coteValue'] = 132;
@@ -43,10 +41,7 @@ class ComputerGameController extends GetxController {
           if (coteValue > 400 && coteValue < 405) {
             player['coteValue'] = 432;
           }
-          //initial value setup done
-
-          //set final value
-
+          //initial value set done
           listPointer4Player.forEach((element) {
             if (element['pointer'] == pointer && element['move'] == 'minus') {
               print(element);
@@ -58,18 +53,16 @@ class ComputerGameController extends GetxController {
                   (player['coteValue'] as int) + randomNumber.value;
             }
           });
-
-          print(player['coteValue']);
-
+          //plus minus done
           int firstDigit =
               int.parse(player['coteValue'].toString().substring(0, 1));
           int lastTwoDigits = int.parse(player['coteValue']
               .toString()
               .substring(player['coteValue'].toString().length - 2));
-
           print(firstDigit);
           print(lastTwoDigits);
           int extraValue = 0;
+          //upto 36 initial value setup with extra value
           if (lastTwoDigits > 36) {
             listPointer4Player.forEach((element) {
               if (element['pointer'] == pointer) {
@@ -99,20 +92,36 @@ class ComputerGameController extends GetxController {
             }
           }
 
-          // listPointer4Player.forEach((elements) {
-          //   if (elements['pointer'] == pointer) {
-          //     if (elements['status'] == 'inactive' &&
-          //         elements['move'] == 'plus') {
-          //       player['coteValue'] =
-          //           int.parse(player['coteValue'].toString()) + extraValue;
-          //     }
-          //     if (elements['status'] == 'inactive' &&
-          //         elements['move'] == 'minus') {
-          //       player['coteValue'] =
-          //           int.parse(player['coteValue'].toString()) - extraValue + 1;
-          //     }
-          //   }
-          // });
+          //setting up the final position value
+
+          listPointer4Player.forEach((elements) {
+            if (elements['pointer'] == pointer) {
+              if (elements['status'] == 'inactive' &&
+                  elements['move'] == 'plus') {
+                player['coteValue'] =
+                    int.parse(player['coteValue'].toString()) + extraValue;
+              }
+              if (elements['status'] == 'inactive' &&
+                  elements['move'] == 'minus') {
+                player['coteValue'] =
+                    int.parse(player['coteValue'].toString()) - extraValue + 1;
+              }
+            }
+          });
+
+          // //checking final value last two for after 111
+          // int finalLastTwoDigits = int.parse(player['coteValue']
+          //     .toString()
+          //     .substring(player['coteValue'].toString().length - 2));
+          // // if (finalLastTwoDigits > 11 && finalLastTwoDigits < 35) {
+          // //   switch (11 - finalLastTwoDigits) {
+          // //     case 1:
+          // //       player['coteValue'] = (player['coteValue'] as int) + 10;
+          // //       break;
+          // //     default:
+          // //       player['coteValue'] = (player['coteValue'] as int) + 20;
+          // //   }
+          // // }
 
           //update the pointer position
           boxPointerList.where((boxPointer) {
