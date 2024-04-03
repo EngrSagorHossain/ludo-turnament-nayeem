@@ -8,72 +8,49 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(vertical: 41.v),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 75.v),
-                      Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                              margin: EdgeInsets.only(right: 24.h),
-                              decoration: AppDecoration.outlinePrimary5,
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CustomImageView(
-                                        imagePath:
-                                            ImageConstant.imgMapsAndFlags1,
-                                        height: 30.adaptSize,
-                                        width: 30.adaptSize,
-                                        margin: EdgeInsets.only(
-                                            left: 5.h, top: 7.v, bottom: 7.v)),
-                                    CustomImageView(
-                                        imagePath: ImageConstant.imgGroup6,
-                                        height: 44.v,
-                                        width: 46.h,
-                                        margin: EdgeInsets.only(left: 7.h))
-                                  ]))),
-                      SizedBox(height: 11.v),
-                      _buildOneStack(),
-                      SizedBox(height: 12.v),
-                      Container(
-                          margin: EdgeInsets.only(left: 16.h),
-                          decoration: AppDecoration.outlinePrimary5,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CustomImageView(
-                                    imagePath: ImageConstant.imgMapsAndFlags2,
-                                    height: 30.adaptSize,
-                                    width: 30.adaptSize,
-                                    margin: EdgeInsets.only(
-                                        left: 6.h, top: 7.v, bottom: 7.v)),
-                                InkWell(
-                                  onTap: () {
-                                    controller.startGeneratingRandomNumbers();
-                                    print('pressed');
-                                  },
-                                  child: Container(
-                                      height: 44.v,
-                                      width: 46.h,
-                                      margin: EdgeInsets.only(left: 6.h),
-                                      child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            CustomImageView(
-                                                imagePath:
-                                                    ImageConstant.imgGroup6,
-                                                height: 44.v,
-                                                width: 46.h,
-                                                alignment: Alignment.center),
-                                            Obx(() {
+    return SafeArea(child: Scaffold(body: Obx(() {
+      return Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(vertical: 41.v),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            SizedBox(height: 75.v),
+            //for top dice
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    margin: EdgeInsets.only(left: 8.h),
+                    decoration: AppDecoration.outlinePrimary5,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomImageView(
+                              imagePath: ImageConstant.imgMapsAndFlags2,
+                              height: 30.adaptSize,
+                              width: 30.adaptSize,
+                              margin: EdgeInsets.only(
+                                  left: 6.h, top: 7.v, bottom: 7.v)),
+                          InkWell(
+                            onTap: () {
+                              controller.startGeneratingRandomNumbers(
+                                  player: 'c');
+                            },
+                            child: Container(
+                                height: 44.v,
+                                width: 46.h,
+                                margin: EdgeInsets.only(left: 6.h),
+                                child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CustomImageView(
+                                          imagePath: ImageConstant.imgGroup6,
+                                          height: 44.v,
+                                          width: 46.h,
+                                          alignment: Alignment.center),
+                                      controller.activeDicePlayer.value == 'b'
+                                          ? Obx(() {
                                               return Transform.rotate(
                                                 angle: controller
                                                         .randomNumber.value *
@@ -88,31 +65,192 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                                                 ),
                                               );
                                             })
-                                          ])),
-                                )
-                              ])),
-                      Spacer(),
-                      GestureDetector(
+                                          : Container(),
+                                    ])),
+                          )
+                        ])),
+                Container(
+                    margin: EdgeInsets.only(right: 10.h),
+                    decoration: AppDecoration.outlinePrimary5,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomImageView(
+                              imagePath: ImageConstant.imgMapsAndFlags3,
+                              height: 30.adaptSize,
+                              width: 30.adaptSize,
+                              margin: EdgeInsets.only(
+                                  left: 6.h, top: 7.v, bottom: 7.v)),
+                          InkWell(
+                            onTap: () {
+                              controller.startGeneratingRandomNumbers(
+                                  player: 'd');
+                            },
+                            child: Container(
+                                height: 44.v,
+                                width: 46.h,
+                                margin: EdgeInsets.only(left: 6.h),
+                                child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CustomImageView(
+                                          imagePath: ImageConstant.imgGroup6,
+                                          height: 44.v,
+                                          width: 46.h,
+                                          alignment: Alignment.center),
+                                      controller.activeDicePlayer.value == 'c'
+                                          ? Obx(() {
+                                              return Transform.rotate(
+                                                angle: controller
+                                                        .randomNumber.value *
+                                                    60 *
+                                                    (3.14159265359 / 180),
+                                                child: CustomImageView(
+                                                  imagePath:
+                                                      'assets/images/dices/${controller.randomNumber.value}.png',
+                                                  height: 30.adaptSize,
+                                                  width: 30.adaptSize,
+                                                  alignment: Alignment.center,
+                                                ),
+                                              );
+                                            })
+                                          : Container()
+                                    ])),
+                          )
+                        ])),
+              ],
+            ),
+            SizedBox(height: 11.v),
+            _buildOneStack(),
+            SizedBox(height: 12.v),
+            //for bottom dice
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 10.h),
+                  decoration: AppDecoration.outlinePrimary5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomImageView(
+                          imagePath: ImageConstant.imgMapsAndFlags2,
+                          height: 30.adaptSize,
+                          width: 30.adaptSize,
+                          margin: EdgeInsets.only(
+                              left: 6.h, top: 7.v, bottom: 7.v)),
+                      InkWell(
                         onTap: () {
-                          onTapBackTwo();
+                          controller.startGeneratingRandomNumbers(player: 'b');
                         },
                         child: Container(
-                          height: 28.v,
-                          width: 32.h,
-                          margin: EdgeInsets.only(left: 16.h),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 3.h, vertical: 2.v),
-                          decoration: AppDecoration.outlinePrimary5.copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder8),
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgGroup27,
-                            height: 20.adaptSize,
-                            width: 20.adaptSize,
-                            alignment: Alignment.centerLeft,
-                          ),
-                        ),
+                            height: 44.v,
+                            width: 46.h,
+                            margin: EdgeInsets.only(left: 6.h),
+                            child:
+                                Stack(alignment: Alignment.center, children: [
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgGroup6,
+                                  height: 44.v,
+                                  width: 46.h,
+                                  alignment: Alignment.center),
+                              controller.activeDicePlayer.value == 'a'
+                                  ? Obx(() {
+                                      return Transform.rotate(
+                                        angle: controller.randomNumber.value *
+                                            60 *
+                                            (3.14159265359 / 180),
+                                        child: CustomImageView(
+                                          imagePath:
+                                              'assets/images/dices/${controller.randomNumber.value}.png',
+                                          height: 30.adaptSize,
+                                          width: 30.adaptSize,
+                                          alignment: Alignment.center,
+                                        ),
+                                      );
+                                    })
+                                  : Container(),
+                            ])),
                       ),
-                    ]))));
+                    ],
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.only(right: 10.h),
+                    decoration: AppDecoration.outlinePrimary5,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomImageView(
+                              imagePath: ImageConstant.imgMapsAndFlags3,
+                              height: 30.adaptSize,
+                              width: 30.adaptSize,
+                              margin: EdgeInsets.only(
+                                  left: 6.h, top: 7.v, bottom: 7.v)),
+                          InkWell(
+                            onTap: () {
+                              controller.startGeneratingRandomNumbers(
+                                  player: 'a');
+                            },
+                            child: Container(
+                                height: 44.v,
+                                width: 46.h,
+                                margin: EdgeInsets.only(left: 6.h),
+                                child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CustomImageView(
+                                          imagePath: ImageConstant.imgGroup6,
+                                          height: 44.v,
+                                          width: 46.h,
+                                          alignment: Alignment.center),
+                                      controller.activeDicePlayer.value == 'd'
+                                          ? Obx(() {
+                                              return Transform.rotate(
+                                                angle: controller
+                                                        .randomNumber.value *
+                                                    60 *
+                                                    (3.14159265359 / 180),
+                                                child: CustomImageView(
+                                                  imagePath:
+                                                      'assets/images/dices/${controller.randomNumber.value}.png',
+                                                  height: 30.adaptSize,
+                                                  width: 30.adaptSize,
+                                                  alignment: Alignment.center,
+                                                ),
+                                              );
+                                            })
+                                          : Container()
+                                    ])),
+                          )
+                        ])),
+              ],
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                onTapBackTwo();
+              },
+              child: Container(
+                height: 28.v,
+                width: 32.h,
+                margin: EdgeInsets.only(left: 16.h),
+                padding: EdgeInsets.symmetric(horizontal: 3.h, vertical: 2.v),
+                decoration: AppDecoration.outlinePrimary5
+                    .copyWith(borderRadius: BorderRadiusStyle.roundedBorder8),
+                child: CustomImageView(
+                  imagePath: ImageConstant.imgGroup27,
+                  height: 20.adaptSize,
+                  width: 20.adaptSize,
+                  alignment: Alignment.centerLeft,
+                ),
+              ),
+            ),
+          ]));
+    })));
   }
 
   /// Section Widget
@@ -135,165 +273,181 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
 
                 // //for player 1
                 PositionPointer(
-                  left: controller.positionListOfBox[0]['left'].toString(),
-                  bottom: controller.positionListOfBox[0]['bottom'].toString(),
+                  left: controller.positionListOfPointer[0]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[0]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[0]['pointer']
+                        pointer: controller.positionListOfPointer[0]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[1]['left'].toString(),
-                  bottom: controller.positionListOfBox[1]['bottom'].toString(),
+                  left: controller.positionListOfPointer[1]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[1]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[1]['pointer']
+                        pointer: controller.positionListOfPointer[1]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[2]['left'].toString(),
-                  bottom: controller.positionListOfBox[2]['bottom'].toString(),
+                  left: controller.positionListOfPointer[2]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[2]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[2]['pointer']
+                        pointer: controller.positionListOfPointer[2]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[3]['left'].toString(),
-                  bottom: controller.positionListOfBox[3]['bottom'].toString(),
+                  left: controller.positionListOfPointer[3]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[3]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags2,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[3]['pointer']
+                        pointer: controller.positionListOfPointer[3]['pointer']
                             .toString());
                   },
                 ),
                 //player 2
                 PositionPointer(
-                  left: controller.positionListOfBox[4]['left'].toString(),
-                  bottom: controller.positionListOfBox[4]['bottom'].toString(),
+                  left: controller.positionListOfPointer[4]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[4]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[4]['pointer']
+                        pointer: controller.positionListOfPointer[4]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[5]['left'].toString(),
-                  bottom: controller.positionListOfBox[5]['bottom'].toString(),
+                  left: controller.positionListOfPointer[5]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[5]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[5]['pointer']
+                        pointer: controller.positionListOfPointer[5]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[6]['left'].toString(),
-                  bottom: controller.positionListOfBox[6]['bottom'].toString(),
+                  left: controller.positionListOfPointer[6]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[6]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[6]['pointer']
+                        pointer: controller.positionListOfPointer[6]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[7]['left'].toString(),
-                  bottom: controller.positionListOfBox[7]['bottom'].toString(),
+                  left: controller.positionListOfPointer[7]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[7]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags140x40,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[7]['pointer']
+                        pointer: controller.positionListOfPointer[7]['pointer']
                             .toString());
                   },
                 ),
                 //player 3
                 PositionPointer(
-                  left: controller.positionListOfBox[8]['left'].toString(),
-                  bottom: controller.positionListOfBox[8]['bottom'].toString(),
+                  left: controller.positionListOfPointer[8]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[8]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[8]['pointer']
+                        pointer: controller.positionListOfPointer[8]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[9]['left'].toString(),
-                  bottom: controller.positionListOfBox[9]['bottom'].toString(),
+                  left: controller.positionListOfPointer[9]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[9]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[9]['pointer']
+                        pointer: controller.positionListOfPointer[9]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[10]['left'].toString(),
-                  bottom: controller.positionListOfBox[10]['bottom'].toString(),
+                  left: controller.positionListOfPointer[10]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[10]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[10]['pointer']
+                        pointer: controller.positionListOfPointer[10]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[11]['left'].toString(),
-                  bottom: controller.positionListOfBox[11]['bottom'].toString(),
+                  left: controller.positionListOfPointer[11]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[11]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[11]['pointer']
+                        pointer: controller.positionListOfPointer[11]['pointer']
                             .toString());
                   },
                 ),
                 //Player 4
                 PositionPointer(
-                  left: controller.positionListOfBox[12]['left'].toString(),
-                  bottom: controller.positionListOfBox[12]['bottom'].toString(),
+                  left: controller.positionListOfPointer[12]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[12]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[12]['pointer']
+                        pointer: controller.positionListOfPointer[12]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[13]['left'].toString(),
-                  bottom: controller.positionListOfBox[13]['bottom'].toString(),
+                  left: controller.positionListOfPointer[13]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[13]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[13]['pointer']
+                        pointer: controller.positionListOfPointer[13]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[14]['left'].toString(),
-                  bottom: controller.positionListOfBox[14]['bottom'].toString(),
+                  left: controller.positionListOfPointer[14]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[14]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[14]['pointer']
+                        pointer: controller.positionListOfPointer[14]['pointer']
                             .toString());
                   },
                 ),
                 PositionPointer(
-                  left: controller.positionListOfBox[15]['left'].toString(),
-                  bottom: controller.positionListOfBox[15]['bottom'].toString(),
+                  left: controller.positionListOfPointer[15]['left'].toString(),
+                  bottom:
+                      controller.positionListOfPointer[15]['bottom'].toString(),
                   imagePath: ImageConstant.imgMapsAndFlags1,
                   onPress: () {
                     controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfBox[15]['pointer']
+                        pointer: controller.positionListOfPointer[15]['pointer']
                             .toString());
                   },
                 ),

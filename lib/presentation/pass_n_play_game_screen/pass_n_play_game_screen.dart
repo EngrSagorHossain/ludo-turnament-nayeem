@@ -175,7 +175,7 @@ class PassNPlayGameScreen extends GetWidget<PassNPlayGameController> {
                     InkWell(
                       onTap: () {
                         controller.diceController
-                            .startGeneratingRandomNumbers();
+                            .startGeneratingRandomNumbers(player: 'a');
                       },
                       child: SizedBox(
                           height: 44.v,
