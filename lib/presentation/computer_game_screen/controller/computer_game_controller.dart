@@ -82,6 +82,10 @@ class ComputerGameController extends GetxController {
           positionListOfPointer.forEach((pointerPosition) {
             //for plus
             if (pointerPosition['pointer'] == pointer) {
+              //setting up winning value
+              int afterWinValue =
+                  int.parse(pointerPosition['coteValue'].toString());
+
               print('from active and plus');
               print(pointerPosition);
               pointerPosition['coteValue'] =
@@ -129,6 +133,25 @@ class ComputerGameController extends GetxController {
                 }
                 print('after >36');
                 print(pointerPosition['coteValue']);
+              }
+              //setting up winner value
+              print(pointerPosition['coteValue'].toString().substring(
+                  pointerPosition['coteValue'].toString().length - 2));
+              int winnerLastTwo = int.parse(afterWinValue
+                  .toString()
+                  .substring(afterWinValue.toString().length - 2));
+              if (winnerLastTwo > 21 && winnerLastTwo < 27) {
+                print('from winner value');
+                if (int.parse(pointerPosition['coteValue'].toString().substring(
+                        pointerPosition['coteValue'].toString().length - 2)) >
+                    27) {
+                  pointerPosition['coteValue'] = afterWinValue;
+                }
+                if (int.parse(pointerPosition['coteValue'].toString().substring(
+                        pointerPosition['coteValue'].toString().length - 2)) ==
+                    27) {
+                  pointerPosition['coteValue'] = firstDigit * 100 + 27;
+                }
               }
             }
           });
@@ -342,7 +365,7 @@ class ComputerGameController extends GetxController {
             //set initial value
             if (coteValue > 100 && coteValue < 105) {
               makePointerActive(pointer: pointer);
-              player['coteValue'] = 132;
+              player['coteValue'] = 124;
             }
             if (coteValue > 200 && coteValue < 205) {
               makePointerActive(pointer: pointer);
@@ -440,8 +463,6 @@ class ComputerGameController extends GetxController {
     {'pointer': 'd2', 'left': 270, 'bottom': 48, 'coteValue': 402},
     {'pointer': 'd3', 'left': 314, 'bottom': 91, 'coteValue': 403},
     {'pointer': 'd4', 'left': 314, 'bottom': 48, 'coteValue': 404},
-    
-
   ].obs;
 
   final boxPointerList = [
@@ -544,7 +565,6 @@ class ComputerGameController extends GetxController {
     {'coteValue': 227, 'left': 155, 'bottom': 183},
     {'coteValue': 327, 'left': 183, 'bottom': 195},
     {'coteValue': 427, 'left': 200, 'bottom': 183},
-
   ];
 
   //dice rolling list

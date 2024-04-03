@@ -27,7 +27,7 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CustomImageView(
-                              imagePath: ImageConstant.imgMapsAndFlags2,
+                              imagePath: ImageConstant.imgMapsAndFlags140x40,
                               height: 30.adaptSize,
                               width: 30.adaptSize,
                               margin: EdgeInsets.only(
@@ -77,7 +77,7 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CustomImageView(
-                              imagePath: ImageConstant.imgMapsAndFlags3,
+                              imagePath: ImageConstant.imgMapsAndFlags1,
                               height: 30.adaptSize,
                               width: 30.adaptSize,
                               margin: EdgeInsets.only(
@@ -452,16 +452,16 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                   },
                 ),
                 //pointer end
-                PositionPointer(
-                  left: '200',
-                  bottom: '183',
-                  imagePath: ImageConstant.imgMapsAndFlags1,
-                  onPress: () {
-                    controller.setPositionValueAndPointer(
-                        pointer: controller.positionListOfPointer[15]['pointer']
-                            .toString());
-                  },
-                ),
+                // PositionPointer(
+                //   left: '200',
+                //   bottom: '183',
+                //   imagePath: ImageConstant.imgMapsAndFlags1,
+                //   onPress: () {
+                //     controller.setPositionValueAndPointer(
+                //         pointer: controller.positionListOfPointer[15]['pointer']
+                //             .toString());
+                //   },
+                // ),
               ],
             );
           }),
