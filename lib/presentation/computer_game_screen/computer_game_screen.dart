@@ -451,6 +451,17 @@ class ComputerGameScreen extends GetWidget<ComputerGameController> {
                             .toString());
                   },
                 ),
+                //pointer end
+                PositionPointer(
+                  left: '200',
+                  bottom: '183',
+                  imagePath: ImageConstant.imgMapsAndFlags1,
+                  onPress: () {
+                    controller.setPositionValueAndPointer(
+                        pointer: controller.positionListOfPointer[15]['pointer']
+                            .toString());
+                  },
+                ),
               ],
             );
           }),

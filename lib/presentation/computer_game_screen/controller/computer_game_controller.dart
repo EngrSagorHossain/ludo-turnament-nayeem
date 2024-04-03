@@ -144,6 +144,9 @@ class ComputerGameController extends GetxController {
                       pointerPosition['coteValue'].toString().length - 2)) ==
                   21) {
                 //setting winning value
+                int afterWinValue =
+                    int.parse(pointerPosition['coteValue'].toString());
+
                 if (pointerPosition['pointer']!.toString().startsWith('a') &&
                     int.parse(pointerPosition['coteValue'].toString()) ~/ 100 ==
                         1) {
@@ -151,6 +154,12 @@ class ComputerGameController extends GetxController {
                   pointerPosition['coteValue'] =
                       (pointerPosition['coteValue'] as int) +
                           randomNumber.value;
+                  if (pointerPosition['coteValue']! as int > 127) {
+                    pointerPosition['coteValue'] = afterWinValue;
+                  }
+                  if (pointerPosition['coteValue']! as int == 127) {
+                    pointerPosition['coteValue'] = 127;
+                  }
                   pointerStatus['move'] = 'plus';
                 } else if (pointerPosition['pointer']!
                         .toString()
@@ -161,6 +170,12 @@ class ComputerGameController extends GetxController {
                   pointerPosition['coteValue'] =
                       (pointerPosition['coteValue'] as int) +
                           randomNumber.value;
+                  if (pointerPosition['coteValue']! as int > 227) {
+                    pointerPosition['coteValue'] = afterWinValue;
+                  }
+                  if (pointerPosition['coteValue']! as int == 227) {
+                    pointerPosition['coteValue'] = 227;
+                  }
                   pointerStatus['move'] = 'plus';
                 } else if (pointerPosition['pointer']!
                         .toString()
@@ -170,8 +185,13 @@ class ComputerGameController extends GetxController {
                   //win c
                   pointerPosition['coteValue'] =
                       (pointerPosition['coteValue'] as int) +
-                          randomNumber.value -
-                          1;
+                          randomNumber.value;
+                  if (pointerPosition['coteValue']! as int > 327) {
+                    pointerPosition['coteValue'] = afterWinValue;
+                  }
+                  if (pointerPosition['coteValue']! as int == 327) {
+                    pointerPosition['coteValue'] = 327;
+                  }
                   pointerStatus['move'] = 'plus';
                 } else if (pointerPosition['pointer']!
                         .toString()
@@ -182,6 +202,12 @@ class ComputerGameController extends GetxController {
                   pointerPosition['coteValue'] =
                       (pointerPosition['coteValue'] as int) +
                           randomNumber.value;
+                  if (pointerPosition['coteValue']! as int > 427) {
+                    pointerPosition['coteValue'] = afterWinValue;
+                  }
+                  if (pointerPosition['coteValue']! as int == 427) {
+                    pointerPosition['coteValue'] = 427;
+                  }
                   pointerStatus['move'] = 'plus';
                 } else {
                   pointerPosition['coteValue'] =
@@ -223,6 +249,8 @@ class ComputerGameController extends GetxController {
                       break;
                     default:
                       //winning value here
+                      int afterWinValue =
+                          int.parse(pointerPosition['coteValue'].toString());
                       if (pointerPosition['pointer']!
                               .toString()
                               .startsWith('a') &&
@@ -232,6 +260,14 @@ class ComputerGameController extends GetxController {
                         //win a
                         pointerPosition['coteValue'] =
                             21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+
+                        if (pointerPosition['coteValue']! as int > 127) {
+                          pointerPosition['coteValue'] = afterWinValue;
+                        }
+                        if (pointerPosition['coteValue']! as int == 127) {
+                          pointerPosition['coteValue'] = 127;
+                        }
+
                         pointerStatus['move'] = 'plus';
                       } else if (pointerPosition['pointer']!
                               .toString()
@@ -242,6 +278,13 @@ class ComputerGameController extends GetxController {
                         //win b
                         pointerPosition['coteValue'] =
                             21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+                        if (pointerPosition['coteValue']! as int > 227) {
+                          pointerPosition['coteValue'] = afterWinValue;
+                        }
+                        if (pointerPosition['coteValue']! as int == 227) {
+                          pointerPosition['coteValue'] = 227;
+                        }
+                        pointerStatus['move'] = 'plus';
                       } else if (pointerPosition['pointer']!
                               .toString()
                               .startsWith('c') &&
@@ -251,6 +294,15 @@ class ComputerGameController extends GetxController {
                         //win c
                         pointerPosition['coteValue'] =
                             21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+                        pointerPosition['coteValue'] =
+                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+                        if (pointerPosition['coteValue']! as int > 327) {
+                          pointerPosition['coteValue'] = afterWinValue;
+                        }
+                        if (pointerPosition['coteValue']! as int == 327) {
+                          pointerPosition['coteValue'] = 327;
+                        }
+                        pointerStatus['move'] = 'plus';
                       } else if (pointerPosition['pointer']!
                               .toString()
                               .startsWith('d') &&
@@ -260,6 +312,15 @@ class ComputerGameController extends GetxController {
                         //win c
                         pointerPosition['coteValue'] =
                             21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+                        pointerPosition['coteValue'] =
+                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
+                        if (pointerPosition['coteValue']! as int > 427) {
+                          pointerPosition['coteValue'] = afterWinValue;
+                        }
+                        if (pointerPosition['coteValue']! as int == 427) {
+                          pointerPosition['coteValue'] = 427;
+                        }
+                        pointerStatus['move'] = 'plus';
                       } else {
                         pointerPosition['coteValue'] =
                             31 + (firstDigit * 100) + (11 - lastTwoDigits) - 2;
@@ -336,7 +397,7 @@ class ComputerGameController extends GetxController {
   //game logic started
   final listPointer4Player = [
     //a
-    {'pointer': 'a1', 'value': 101, 'status': 'inactive', 'move': 'minus'},
+    {'pointer': 'a1', 'value': 101, 'status': 'inactive', 'move': 'plus'},
     {'pointer': 'a2', 'value': 102, 'status': 'inactive', 'move': 'plus'},
     {'pointer': 'a3', 'value': 103, 'status': 'inactive', 'move': 'plus'},
     {'pointer': 'a4', 'value': 104, 'status': 'inactive', 'move': 'plus'},
@@ -379,6 +440,8 @@ class ComputerGameController extends GetxController {
     {'pointer': 'd2', 'left': 270, 'bottom': 48, 'coteValue': 402},
     {'pointer': 'd3', 'left': 314, 'bottom': 91, 'coteValue': 403},
     {'pointer': 'd4', 'left': 314, 'bottom': 48, 'coteValue': 404},
+    
+
   ].obs;
 
   final boxPointerList = [
@@ -475,6 +538,13 @@ class ComputerGameController extends GetxController {
     {'coteValue': 435, 'left': 255, 'bottom': 155},
     {'coteValue': 436, 'left': 232, 'bottom': 155},
     //End line D
+
+    //winner value settup
+    {'coteValue': 127, 'left': 183, 'bottom': 155},
+    {'coteValue': 227, 'left': 155, 'bottom': 183},
+    {'coteValue': 327, 'left': 183, 'bottom': 195},
+    {'coteValue': 427, 'left': 200, 'bottom': 183},
+
   ];
 
   //dice rolling list
