@@ -7,7 +7,8 @@ import 'package:ludu_365/presentation/computer_game_screen/models/computer_game_
 class ComputerGameController extends GetxController {
   Rx<ComputerGameModel> computerGameModelObj = ComputerGameModel().obs;
 
-  var randomNumber = 2.obs; // Observable to store the random number
+  var randomNumber = 0.obs; // Observable to store the random number
+  final isValueGiven = true.obs;
   late Timer _timer; // Timer to generate random numbers
   final currentPlayer = 'a'.obs;
   void startGeneratingRandomNumbers({required String player}) {
@@ -17,27 +18,35 @@ class ComputerGameController extends GetxController {
       // Generate random number between 1 to 6
       randomNumber.value = 1 + (DateTime.now().millisecondsSinceEpoch % 6);
     });
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       _timer.cancel();
-      if (randomNumber.value != 6) {
-        print(aActiveNumber.value);
-        if (player == 'b' && aActiveNumber.value == 0) {
-          updateDice(player: player);
-          print('called');
+      Future.delayed(Duration(seconds: 1), () {
+        if (randomNumber.value != 6) {
+          print(aActiveNumber.value);
+          if (player == 'b' && aActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'c' && bActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'd' && cActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'a' && dActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+        } else {
+          isValueGiven.value = false;
         }
-        if (player == 'c' && bActiveNumber.value == 0) {
-          updateDice(player: player);
-          print('called');
-        }
-        if (player == 'd' && cActiveNumber.value == 0) {
-          updateDice(player: player);
-          print('called');
-        }
-        if (player == 'a' && dActiveNumber.value == 0) {
-          updateDice(player: player);
-          print('called');
-        }
-      }
+      });
     });
     currentPlayer.value = player;
   }
@@ -55,157 +64,211 @@ class ComputerGameController extends GetxController {
 
   //logic started
   void setPositionValueAndPointer({required String pointer}) {
-    if (randomNumber.value != 6) {
-      print('called');
-      updateDice(player: currentPlayer.value);
-    }
-    print(pointer);
-    int firstDigit = 0;
-    int lastTwoDigits = 0;
-    int extraValue = 0;
-    listPointer4Player.forEach((pointerStatus) {
-      if (pointerStatus['pointer'] == pointer &&
-          pointerStatus['status'] == 'active') {
-        //apply active logic
-        if (pointerStatus['move'] == 'plus') {
-          positionListOfPointer.forEach((pointerPosition) {
-            //for plus
-            if (pointerPosition['pointer'] == pointer) {
-              print('from active and plus');
-              print(pointerPosition);
-              pointerPosition['coteValue'] =
-                  (pointerPosition['coteValue'] as int) + randomNumber.value;
-              //set 1st value
-              firstDigit = int.parse(
-                  pointerPosition['coteValue'].toString().substring(0, 1));
-              lastTwoDigits = int.parse(pointerPosition['coteValue']
-                  .toString()
-                  .substring(
-                      pointerPosition['coteValue'].toString().length - 2));
-              //add greater than 36
-              if (pointerPosition['pointer'] == pointer && lastTwoDigits > 36) {
-                pointerStatus['move'] = 'minus';
-                print('first digits and last two');
-                print(firstDigit);
-                print(lastTwoDigits);
-                switch (firstDigit) {
-                  case 1:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            136;
-                    pointerPosition['coteValue'] = 216 - extraValue + 1;
-                    break;
-                  case 2:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            236;
-                    pointerPosition['coteValue'] = 316 - extraValue + 1;
-                    break;
-                  case 3:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            336;
-                    pointerPosition['coteValue'] = 416 - extraValue + 1;
-                    break;
-                  case 4:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            436;
-                    pointerPosition['coteValue'] = 116 - extraValue + 1;
-                    break;
-                  default:
-                    break;
-                }
-                print('after >36');
-                print(pointerPosition['coteValue']);
-              }
-            }
-          });
-
-          positionListOfPointer.refresh();
-        } else {
-          //for minus
-          positionListOfPointer.forEach((pointerPosition) {
-            if (pointerPosition['pointer'] == pointer) {
-              print('from active and minus');
-              print(pointerPosition);
-              if (int.parse(pointerPosition['coteValue'].toString().substring(
-                      pointerPosition['coteValue'].toString().length - 2)) ==
-                  21) {
+    if (pointer.startsWith(activeDicePlayer.value) &&
+        isValueGiven.value == false) {
+      if (randomNumber.value != 6) {
+        print('called');
+        updateDice(player: currentPlayer.value);
+      }
+      print(pointer);
+      int firstDigit = 0;
+      int lastTwoDigits = 0;
+      int extraValue = 0;
+      listPointer4Player.forEach((pointerStatus) {
+        if (pointerStatus['pointer'] == pointer &&
+            pointerStatus['status'] == 'active') {
+          //apply active logic
+          if (pointerStatus['move'] == 'plus') {
+            positionListOfPointer.forEach((pointerPosition) {
+              //for plus
+              if (pointerPosition['pointer'] == pointer) {
+                print('from active and plus');
+                print(pointerPosition);
                 pointerPosition['coteValue'] =
-                    (pointerPosition['coteValue'] as int) +
-                        10 +
-                        randomNumber.value -
-                        1;
-
-                pointerStatus['move'] = 'plus';
-                listPointer4Player.refresh();
-              } else {
-                //for minus
-                pointerPosition['coteValue'] =
-                    (pointerPosition['coteValue'] as int) - randomNumber.value;
-                print('minus value');
-                print(pointerPosition['coteValue']);
-                //set the 1st value
+                    (pointerPosition['coteValue'] as int) + randomNumber.value;
+                //set 1st value
                 firstDigit = int.parse(
                     pointerPosition['coteValue'].toString().substring(0, 1));
                 lastTwoDigits = int.parse(pointerPosition['coteValue']
                     .toString()
                     .substring(
                         pointerPosition['coteValue'].toString().length - 2));
-                if (lastTwoDigits <= 11 && lastTwoDigits > 4) {
-                  switch (11 - lastTwoDigits) {
+                //add greater than 36
+                if (pointerPosition['pointer'] == pointer &&
+                    lastTwoDigits > 36) {
+                  pointerStatus['move'] = 'minus';
+                  print('first digits and last two');
+                  print(firstDigit);
+                  print(lastTwoDigits);
+                  switch (firstDigit) {
                     case 1:
-                      pointerPosition['coteValue'] = 21 + (firstDigit * 100);
-                      pointerStatus['move'] = 'minus';
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              136;
+                      pointerPosition['coteValue'] = 216 - extraValue + 1;
                       break;
-                    case 0:
-                      pointerPosition['coteValue'] =
-                          pointerPosition['coteValue'] as int;
-                      -randomNumber.value;
-                      pointerStatus['move'] = 'minus';
-
+                    case 2:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              236;
+                      pointerPosition['coteValue'] = 316 - extraValue + 1;
+                      break;
+                    case 3:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              336;
+                      pointerPosition['coteValue'] = 416 - extraValue + 1;
+                      break;
+                    case 4:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              436;
+                      pointerPosition['coteValue'] = 116 - extraValue + 1;
                       break;
                     default:
-                      print('called');
-                      pointerPosition['coteValue'] =
-                          31 + (firstDigit * 100) + (11 - lastTwoDigits) - 2;
-                      pointerStatus['move'] = 'plus';
                       break;
                   }
-                  listPointer4Player.refresh();
+                  print('after >36');
+                  print(pointerPosition['coteValue']);
                 }
+              }
+            });
+
+            positionListOfPointer.refresh();
+          } else {
+            //for minus
+            positionListOfPointer.forEach((pointerPosition) {
+              if (pointerPosition['pointer'] == pointer) {
+                print('from active and minus');
+                print(pointerPosition);
+                if (int.parse(pointerPosition['coteValue'].toString().substring(
+                        pointerPosition['coteValue'].toString().length - 2)) ==
+                    21) {
+                  pointerPosition['coteValue'] =
+                      (pointerPosition['coteValue'] as int) +
+                          10 +
+                          randomNumber.value -
+                          1;
+
+                  pointerStatus['move'] = 'plus';
+                  listPointer4Player.refresh();
+                } else {
+                  //for minus
+                  pointerPosition['coteValue'] =
+                      (pointerPosition['coteValue'] as int) -
+                          randomNumber.value;
+                  print('minus value');
+                  print(pointerPosition['coteValue']);
+                  //set the 1st value
+                  firstDigit = int.parse(
+                      pointerPosition['coteValue'].toString().substring(0, 1));
+                  lastTwoDigits = int.parse(pointerPosition['coteValue']
+                      .toString()
+                      .substring(
+                          pointerPosition['coteValue'].toString().length - 2));
+                  if (lastTwoDigits <= 11 && lastTwoDigits > 4) {
+                    switch (11 - lastTwoDigits) {
+                      case 1:
+                        pointerPosition['coteValue'] = 21 + (firstDigit * 100);
+                        pointerStatus['move'] = 'minus';
+                        break;
+                      case 0:
+                        pointerPosition['coteValue'] =
+                            pointerPosition['coteValue'] as int;
+                        -randomNumber.value;
+                        pointerStatus['move'] = 'minus';
+
+                        break;
+                      default:
+                        if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('a') &&
+                            int.parse(pointerPosition['coteValue'].toString()) %
+                                    100 ==
+                                1) {
+                          //win a
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          pointerStatus['move'] = 'plus';
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('b') &&
+                            int.parse(pointerPosition['coteValue'].toString()) %
+                                    100 ==
+                                2) {
+                          //win b
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('c') &&
+                            int.parse(pointerPosition['coteValue'].toString()) %
+                                    100 ==
+                                3) {
+                          //win c
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('d') &&
+                            int.parse(pointerPosition['coteValue'].toString()) %
+                                    100 ==
+                                4) {
+                          //win c
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                        } else {
+                          pointerPosition['coteValue'] = 31 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              2;
+                          pointerStatus['move'] = 'plus';
+                        }
+                        break;
+                    }
+                    listPointer4Player.refresh();
+                  }
+                }
+              }
+            });
+          }
+        } else if (pointerStatus['pointer'] == pointer &&
+            pointerStatus['status'] == 'inactive') {
+          positionListOfPointer.forEach((player) {
+            if (player['pointer'] == pointer) {
+              int coteValue = player['coteValue'] as int;
+              //set initial value
+              if (coteValue > 100 && coteValue < 105) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 132;
+              }
+              if (coteValue > 200 && coteValue < 205) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 232;
+              }
+              if (coteValue > 300 && coteValue < 305) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 332;
+              }
+              if (coteValue > 400 && coteValue < 405) {
+                player['coteValue'] = 432;
+                makePointerActive(pointer: pointer);
               }
             }
           });
         }
-      } else if (pointerStatus['pointer'] == pointer &&
-          pointerStatus['status'] == 'inactive') {
-        positionListOfPointer.forEach((player) {
-          if (player['pointer'] == pointer) {
-            int coteValue = player['coteValue'] as int;
-            //set initial value
-            if (coteValue > 100 && coteValue < 105) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 132;
-            }
-            if (coteValue > 200 && coteValue < 205) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 232;
-            }
-            if (coteValue > 300 && coteValue < 305) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 332;
-            }
-            if (coteValue > 400 && coteValue < 405) {
-              player['coteValue'] = 432;
-              makePointerActive(pointer: pointer);
-            }
-          }
-        });
-      }
-    });
-    updateThePositionOfPointer(pointerName: pointer);
+      });
+      updateThePositionOfPointer(pointerName: pointer);
+    }
+    isValueGiven.value = true;
   }
 
   void updateThePositionOfPointer({required String pointerName}) {
