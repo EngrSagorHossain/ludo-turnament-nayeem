@@ -240,9 +240,6 @@ class ComputerGameController extends GetxController {
                           1;
                   pointerStatus['move'] = 'plus';
                 }
-
-                //end
-
                 listPointer4Player.refresh();
               } else {
                 //for minus
