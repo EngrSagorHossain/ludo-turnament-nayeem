@@ -387,28 +387,30 @@ class ComputerGameController extends GetxController {
           }
         } else if (pointerStatus['pointer'] == pointer &&
             pointerStatus['status'] == 'inactive') {
-          positionListOfPointer.forEach((player) {
-            if (player['pointer'] == pointer) {
-              int coteValue = player['coteValue'] as int;
-              //set initial value
-              if (coteValue > 100 && coteValue < 105) {
-                makePointerActive(pointer: pointer);
-                player['coteValue'] = 132;
+          if (randomNumber.value == 6) {
+            positionListOfPointer.forEach((player) {
+              if (player['pointer'] == pointer) {
+                int coteValue = player['coteValue'] as int;
+                //set initial value
+                if (coteValue > 100 && coteValue < 105) {
+                  makePointerActive(pointer: pointer);
+                  player['coteValue'] = 132;
+                }
+                if (coteValue > 200 && coteValue < 205) {
+                  makePointerActive(pointer: pointer);
+                  player['coteValue'] = 232;
+                }
+                if (coteValue > 300 && coteValue < 305) {
+                  makePointerActive(pointer: pointer);
+                  player['coteValue'] = 332;
+                }
+                if (coteValue > 400 && coteValue < 405) {
+                  player['coteValue'] = 432;
+                  makePointerActive(pointer: pointer);
+                }
               }
-              if (coteValue > 200 && coteValue < 205) {
-                makePointerActive(pointer: pointer);
-                player['coteValue'] = 232;
-              }
-              if (coteValue > 300 && coteValue < 305) {
-                makePointerActive(pointer: pointer);
-                player['coteValue'] = 332;
-              }
-              if (coteValue > 400 && coteValue < 405) {
-                player['coteValue'] = 432;
-                makePointerActive(pointer: pointer);
-              }
-            }
-          });
+            });
+          }
         }
       });
       updateThePositionOfPointer(pointerName: pointer);
