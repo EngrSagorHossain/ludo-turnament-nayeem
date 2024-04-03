@@ -21,34 +21,34 @@ class ComputerGameController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       _timer.cancel();
       Future.delayed(Duration(seconds: 1), () {
-        // if (randomNumber.value != 6) {
-        //   print(aActiveNumber.value);
-        //   if (player == 'b' && aActiveNumber.value == 0) {
-        //     updateDice(player: player);
-        //   } else {
-        //     isValueGiven.value = false;
-        //   }
-        //   if (player == 'c' && bActiveNumber.value == 0) {
-        //     updateDice(player: player);
-        //   } else {
-        //     isValueGiven.value = false;
-        //   }
-        //   if (player == 'd' && cActiveNumber.value == 0) {
-        //     updateDice(player: player);
-        //   } else {
-        //     isValueGiven.value = false;
-        //   }
-        //   if (player == 'a' && dActiveNumber.value == 0) {
-        //     updateDice(player: player);
-        //   } else {
-        //     isValueGiven.value = false;
-        //   }
-        // } else {
-        //   isValueGiven.value = false;
-        // }
+        if (randomNumber.value != 6) {
+          print(aActiveNumber.value);
+          if (player == 'b' && aActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'c' && bActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'd' && cActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+          if (player == 'a' && dActiveNumber.value == 0) {
+            updateDice(player: player);
+          } else {
+            isValueGiven.value = false;
+          }
+        } else {
+          isValueGiven.value = false;
+        }
       });
     });
-    // currentPlayer.value = player;
+    currentPlayer.value = player;
   }
 
   void makePointerActive({required String pointer}) async {
@@ -61,328 +61,359 @@ class ComputerGameController extends GetxController {
     });
     listPointer4Player.refresh();
   }
+  //game logic started
 
   //logic started
   void setPositionValueAndPointer({required String pointer}) {
-    // if (pointer.startsWith(activeDicePlayer.value) &&
-    //     isValueGiven.value == false) {
-    //   if (randomNumber.value != 6) {
-    //     print('called');
-    //     updateDice(player: currentPlayer.value);
-    //   }
-    print(pointer);
-    int firstDigit = 0;
-    int lastTwoDigits = 0;
-    int extraValue = 0;
-    listPointer4Player.forEach((pointerStatus) {
-      if (pointerStatus['pointer'] == pointer &&
-          pointerStatus['status'] == 'active') {
-        //apply active logic
-        if (pointerStatus['move'] == 'plus') {
-          positionListOfPointer.forEach((pointerPosition) {
-            //for plus
-            if (pointerPosition['pointer'] == pointer) {
-              //setting up winning value
-              int afterWinValue =
-                  int.parse(pointerPosition['coteValue'].toString());
-
-              print('from active and plus');
-              print(pointerPosition);
-              pointerPosition['coteValue'] =
-                  (pointerPosition['coteValue'] as int) + randomNumber.value;
-              //set 1st value
-              firstDigit = int.parse(
-                  pointerPosition['coteValue'].toString().substring(0, 1));
-              lastTwoDigits = int.parse(pointerPosition['coteValue']
-                  .toString()
-                  .substring(
-                      pointerPosition['coteValue'].toString().length - 2));
-              //add greater than 36
-              if (pointerPosition['pointer'] == pointer && lastTwoDigits > 36) {
-                pointerStatus['move'] = 'minus';
-                print('first digits and last two');
-                print(firstDigit);
-                print(lastTwoDigits);
-                switch (firstDigit) {
-                  case 1:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            136;
-                    pointerPosition['coteValue'] = 216 - extraValue + 1;
-                    break;
-                  case 2:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            236;
-                    pointerPosition['coteValue'] = 316 - extraValue + 1;
-                    break;
-                  case 3:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            336;
-                    pointerPosition['coteValue'] = 416 - extraValue + 1;
-                    break;
-                  case 4:
-                    extraValue =
-                        int.parse(pointerPosition['coteValue'].toString()) -
-                            436;
-                    pointerPosition['coteValue'] = 116 - extraValue + 1;
-                    break;
-                  default:
-                    break;
-                }
-                print('after >36');
-                print(pointerPosition['coteValue']);
-              }
-              //setting up winner value
-              print(pointerPosition['coteValue'].toString().substring(
-                  pointerPosition['coteValue'].toString().length - 2));
-              int winnerLastTwo = int.parse(afterWinValue
-                  .toString()
-                  .substring(afterWinValue.toString().length - 2));
-              if (winnerLastTwo > 21 && winnerLastTwo < 27) {
-                print('from winner value');
-                if (int.parse(pointerPosition['coteValue'].toString().substring(
-                        pointerPosition['coteValue'].toString().length - 2)) >
-                    27) {
-                  pointerPosition['coteValue'] = afterWinValue;
-                }
-                if (int.parse(pointerPosition['coteValue'].toString().substring(
-                        pointerPosition['coteValue'].toString().length - 2)) ==
-                    27) {
-                  pointerPosition['coteValue'] = firstDigit * 100 + 27;
-                }
-              }
-            }
-          });
-
-          positionListOfPointer.refresh();
-        } else {
-          //for minus
-          positionListOfPointer.forEach((pointerPosition) {
-            if (pointerPosition['pointer'] == pointer) {
-              print('from active and minus');
-              print(pointerPosition);
-              if (int.parse(pointerPosition['coteValue'].toString().substring(
-                      pointerPosition['coteValue'].toString().length - 2)) ==
-                  21) {
-                //setting winning value
+    if (pointer.startsWith(activeDicePlayer.value) &&
+        isValueGiven.value == false) {
+      if (randomNumber.value != 6) {
+        print('called');
+        updateDice(player: currentPlayer.value);
+      }
+      print(pointer);
+      int firstDigit = 0;
+      int lastTwoDigits = 0;
+      int extraValue = 0;
+      listPointer4Player.forEach((pointerStatus) {
+        if (pointerStatus['pointer'] == pointer &&
+            pointerStatus['status'] == 'active') {
+          //apply active logic
+          if (pointerStatus['move'] == 'plus') {
+            positionListOfPointer.forEach((pointerPosition) {
+              //for plus
+              if (pointerPosition['pointer'] == pointer) {
+                //setting up winning value
                 int afterWinValue =
                     int.parse(pointerPosition['coteValue'].toString());
 
-                if (pointerPosition['pointer']!.toString().startsWith('a') &&
-                    int.parse(pointerPosition['coteValue'].toString()) ~/ 100 ==
-                        1) {
-                  //win a
-                  pointerPosition['coteValue'] =
-                      (pointerPosition['coteValue'] as int) +
-                          randomNumber.value;
-                  if (pointerPosition['coteValue']! as int > 127) {
-                    pointerPosition['coteValue'] = afterWinValue;
-                  }
-                  if (pointerPosition['coteValue']! as int == 127) {
-                    pointerPosition['coteValue'] = 127;
-                  }
-                  pointerStatus['move'] = 'plus';
-                } else if (pointerPosition['pointer']!
-                        .toString()
-                        .startsWith('b') &&
-                    int.parse(pointerPosition['coteValue'].toString()) ~/ 100 ==
-                        2) {
-                  //win b
-                  pointerPosition['coteValue'] =
-                      (pointerPosition['coteValue'] as int) +
-                          randomNumber.value;
-                  if (pointerPosition['coteValue']! as int > 227) {
-                    pointerPosition['coteValue'] = afterWinValue;
-                  }
-                  if (pointerPosition['coteValue']! as int == 227) {
-                    pointerPosition['coteValue'] = 227;
-                  }
-                  pointerStatus['move'] = 'plus';
-                } else if (pointerPosition['pointer']!
-                        .toString()
-                        .startsWith('c') &&
-                    int.parse(pointerPosition['coteValue'].toString()) ~/ 100 ==
-                        3) {
-                  //win c
-                  pointerPosition['coteValue'] =
-                      (pointerPosition['coteValue'] as int) +
-                          randomNumber.value;
-                  if (pointerPosition['coteValue']! as int > 327) {
-                    pointerPosition['coteValue'] = afterWinValue;
-                  }
-                  if (pointerPosition['coteValue']! as int == 327) {
-                    pointerPosition['coteValue'] = 327;
-                  }
-                  pointerStatus['move'] = 'plus';
-                } else if (pointerPosition['pointer']!
-                        .toString()
-                        .startsWith('d') &&
-                    int.parse(pointerPosition['coteValue'].toString()) ~/ 100 ==
-                        4) {
-                  //win d
-                  pointerPosition['coteValue'] =
-                      (pointerPosition['coteValue'] as int) +
-                          randomNumber.value;
-                  if (pointerPosition['coteValue']! as int > 427) {
-                    pointerPosition['coteValue'] = afterWinValue;
-                  }
-                  if (pointerPosition['coteValue']! as int == 427) {
-                    pointerPosition['coteValue'] = 427;
-                  }
-                  pointerStatus['move'] = 'plus';
-                } else {
-                  pointerPosition['coteValue'] =
-                      (pointerPosition['coteValue'] as int) +
-                          10 +
-                          randomNumber.value -
-                          1;
-                  pointerStatus['move'] = 'plus';
-                }
-                listPointer4Player.refresh();
-              } else {
-                //for minus
+                print('from active and plus');
+                print(pointerPosition);
                 pointerPosition['coteValue'] =
-                    (pointerPosition['coteValue'] as int) - randomNumber.value;
-                print('minus value');
-                print(pointerPosition['coteValue']);
-                //set the 1st value
+                    (pointerPosition['coteValue'] as int) + randomNumber.value;
+                // checkCutPointer(
+                //     pointerValue: pointerPosition['coteValue'] as int);
+                //set 1st value
                 firstDigit = int.parse(
                     pointerPosition['coteValue'].toString().substring(0, 1));
                 lastTwoDigits = int.parse(pointerPosition['coteValue']
                     .toString()
                     .substring(
                         pointerPosition['coteValue'].toString().length - 2));
-                if (lastTwoDigits <= 11 && lastTwoDigits > 4) {
-                  switch (11 - lastTwoDigits) {
+                //add greater than 36
+                if (pointerPosition['pointer'] == pointer &&
+                    lastTwoDigits > 36) {
+                  pointerStatus['move'] = 'minus';
+                  print('first digits and last two');
+                  print(firstDigit);
+                  print(lastTwoDigits);
+                  switch (firstDigit) {
                     case 1:
-                      pointerPosition['coteValue'] = 21 + (firstDigit * 100);
-                      pointerStatus['move'] = 'minus';
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              136;
+                      pointerPosition['coteValue'] = 216 - extraValue + 1;
                       break;
-                    case 0:
-                      pointerPosition['coteValue'] =
-                          pointerPosition['coteValue'] as int;
-                      -randomNumber.value;
-                      pointerStatus['move'] = 'minus';
-
+                    case 2:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              236;
+                      pointerPosition['coteValue'] = 316 - extraValue + 1;
+                      break;
+                    case 3:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              336;
+                      pointerPosition['coteValue'] = 416 - extraValue + 1;
+                      break;
+                    case 4:
+                      extraValue =
+                          int.parse(pointerPosition['coteValue'].toString()) -
+                              436;
+                      pointerPosition['coteValue'] = 116 - extraValue + 1;
                       break;
                     default:
-                      //winning value here
-                      int afterWinValue =
-                          int.parse(pointerPosition['coteValue'].toString());
-                      if (pointerPosition['pointer']!
-                              .toString()
-                              .startsWith('a') &&
-                          int.parse(pointerPosition['coteValue'].toString()) ~/
-                                  100 ==
-                              1) {
-                        //win a
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-
-                        if (pointerPosition['coteValue']! as int > 127) {
-                          pointerPosition['coteValue'] = afterWinValue;
-                        }
-                        if (pointerPosition['coteValue']! as int == 127) {
-                          pointerPosition['coteValue'] = 127;
-                        }
-
-                        pointerStatus['move'] = 'plus';
-                      } else if (pointerPosition['pointer']!
-                              .toString()
-                              .startsWith('b') &&
-                          int.parse(pointerPosition['coteValue'].toString()) ~/
-                                  100 ==
-                              2) {
-                        //win b
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-                        if (pointerPosition['coteValue']! as int > 227) {
-                          pointerPosition['coteValue'] = afterWinValue;
-                        }
-                        if (pointerPosition['coteValue']! as int == 227) {
-                          pointerPosition['coteValue'] = 227;
-                        }
-                        pointerStatus['move'] = 'plus';
-                      } else if (pointerPosition['pointer']!
-                              .toString()
-                              .startsWith('c') &&
-                          int.parse(pointerPosition['coteValue'].toString()) ~/
-                                  100 ==
-                              3) {
-                        //win c
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-                        if (pointerPosition['coteValue']! as int > 327) {
-                          pointerPosition['coteValue'] = afterWinValue;
-                        }
-                        if (pointerPosition['coteValue']! as int == 327) {
-                          pointerPosition['coteValue'] = 327;
-                        }
-                        pointerStatus['move'] = 'plus';
-                      } else if (pointerPosition['pointer']!
-                              .toString()
-                              .startsWith('d') &&
-                          int.parse(pointerPosition['coteValue'].toString()) ~/
-                                  100 ==
-                              4) {
-                        //win c
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-                        pointerPosition['coteValue'] =
-                            21 + (firstDigit * 100) + (11 - lastTwoDigits) - 1;
-                        if (pointerPosition['coteValue']! as int > 427) {
-                          pointerPosition['coteValue'] = afterWinValue;
-                        }
-                        if (pointerPosition['coteValue']! as int == 427) {
-                          pointerPosition['coteValue'] = 427;
-                        }
-                        pointerStatus['move'] = 'plus';
-                      } else {
-                        pointerPosition['coteValue'] =
-                            31 + (firstDigit * 100) + (11 - lastTwoDigits) - 2;
-                        pointerStatus['move'] = 'plus';
-                      }
                       break;
                   }
-                  listPointer4Player.refresh();
+                  print('after >36');
+                  print(pointerPosition['coteValue']);
                 }
+                //setting up winner value
+                print(pointerPosition['coteValue'].toString().substring(
+                    pointerPosition['coteValue'].toString().length - 2));
+                int winnerLastTwo = int.parse(afterWinValue
+                    .toString()
+                    .substring(afterWinValue.toString().length - 2));
+                if (winnerLastTwo > 21 && winnerLastTwo < 27) {
+                  print('from winner value');
+                  if (int.parse(pointerPosition['coteValue']
+                          .toString()
+                          .substring(
+                              pointerPosition['coteValue'].toString().length -
+                                  2)) >
+                      27) {
+                    pointerPosition['coteValue'] = afterWinValue;
+                  }
+                  if (int.parse(pointerPosition['coteValue']
+                          .toString()
+                          .substring(
+                              pointerPosition['coteValue'].toString().length -
+                                  2)) ==
+                      27) {
+                    pointerPosition['coteValue'] = firstDigit * 100 + 27;
+                  }
+                }
+              }
+            });
+
+            positionListOfPointer.refresh();
+          } else {
+            //for minus
+            positionListOfPointer.forEach((pointerPosition) {
+              if (pointerPosition['pointer'] == pointer) {
+                print('from active and minus');
+                print(pointerPosition);
+                if (int.parse(pointerPosition['coteValue'].toString().substring(
+                        pointerPosition['coteValue'].toString().length - 2)) ==
+                    21) {
+                  //setting winning value
+                  int afterWinValue =
+                      int.parse(pointerPosition['coteValue'].toString());
+
+                  if (pointerPosition['pointer']!.toString().startsWith('a') &&
+                      int.parse(pointerPosition['coteValue'].toString()) ~/
+                              100 ==
+                          1) {
+                    //win a
+                    pointerPosition['coteValue'] =
+                        (pointerPosition['coteValue'] as int) +
+                            randomNumber.value;
+                    if (pointerPosition['coteValue']! as int > 127) {
+                      pointerPosition['coteValue'] = afterWinValue;
+                    }
+                    if (pointerPosition['coteValue']! as int == 127) {
+                      pointerPosition['coteValue'] = 127;
+                    }
+                    pointerStatus['move'] = 'plus';
+                  } else if (pointerPosition['pointer']!
+                          .toString()
+                          .startsWith('b') &&
+                      int.parse(pointerPosition['coteValue'].toString()) ~/
+                              100 ==
+                          2) {
+                    //win b
+                    pointerPosition['coteValue'] =
+                        (pointerPosition['coteValue'] as int) +
+                            randomNumber.value;
+                    if (pointerPosition['coteValue']! as int > 227) {
+                      pointerPosition['coteValue'] = afterWinValue;
+                    }
+                    if (pointerPosition['coteValue']! as int == 227) {
+                      pointerPosition['coteValue'] = 227;
+                    }
+                    pointerStatus['move'] = 'plus';
+                  } else if (pointerPosition['pointer']!
+                          .toString()
+                          .startsWith('c') &&
+                      int.parse(pointerPosition['coteValue'].toString()) ~/
+                              100 ==
+                          3) {
+                    //win c
+                    pointerPosition['coteValue'] =
+                        (pointerPosition['coteValue'] as int) +
+                            randomNumber.value;
+                    if (pointerPosition['coteValue']! as int > 327) {
+                      pointerPosition['coteValue'] = afterWinValue;
+                    }
+                    if (pointerPosition['coteValue']! as int == 327) {
+                      pointerPosition['coteValue'] = 327;
+                    }
+                    pointerStatus['move'] = 'plus';
+                  } else if (pointerPosition['pointer']!
+                          .toString()
+                          .startsWith('d') &&
+                      int.parse(pointerPosition['coteValue'].toString()) ~/
+                              100 ==
+                          4) {
+                    //win d
+                    pointerPosition['coteValue'] =
+                        (pointerPosition['coteValue'] as int) +
+                            randomNumber.value;
+                    if (pointerPosition['coteValue']! as int > 427) {
+                      pointerPosition['coteValue'] = afterWinValue;
+                    }
+                    if (pointerPosition['coteValue']! as int == 427) {
+                      pointerPosition['coteValue'] = 427;
+                    }
+                    pointerStatus['move'] = 'plus';
+                  } else {
+                    pointerPosition['coteValue'] =
+                        (pointerPosition['coteValue'] as int) +
+                            10 +
+                            randomNumber.value -
+                            1;
+                    pointerStatus['move'] = 'plus';
+                  }
+                  listPointer4Player.refresh();
+                } else {
+                  //for minus
+                  pointerPosition['coteValue'] =
+                      (pointerPosition['coteValue'] as int) -
+                          randomNumber.value;
+                  print('minus value');
+                  print(pointerPosition['coteValue']);
+                  //set the 1st value
+                  firstDigit = int.parse(
+                      pointerPosition['coteValue'].toString().substring(0, 1));
+                  lastTwoDigits = int.parse(pointerPosition['coteValue']
+                      .toString()
+                      .substring(
+                          pointerPosition['coteValue'].toString().length - 2));
+                  if (lastTwoDigits <= 11 && lastTwoDigits > 4) {
+                    switch (11 - lastTwoDigits) {
+                      case 1:
+                        pointerPosition['coteValue'] = 21 + (firstDigit * 100);
+                        pointerStatus['move'] = 'minus';
+                        break;
+                      case 0:
+                        pointerPosition['coteValue'] =
+                            pointerPosition['coteValue'] as int;
+                        -randomNumber.value;
+                        pointerStatus['move'] = 'minus';
+
+                        break;
+                      default:
+                        //winning value here
+                        int afterWinValue =
+                            int.parse(pointerPosition['coteValue'].toString());
+                        if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('a') &&
+                            int.parse(pointerPosition['coteValue'].toString()) ~/
+                                    100 ==
+                                1) {
+                          //win a
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+
+                          if (pointerPosition['coteValue']! as int > 127) {
+                            pointerPosition['coteValue'] = afterWinValue;
+                          }
+                          if (pointerPosition['coteValue']! as int == 127) {
+                            pointerPosition['coteValue'] = 127;
+                          }
+
+                          pointerStatus['move'] = 'plus';
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('b') &&
+                            int.parse(pointerPosition['coteValue'].toString()) ~/
+                                    100 ==
+                                2) {
+                          //win b
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          if (pointerPosition['coteValue']! as int > 227) {
+                            pointerPosition['coteValue'] = afterWinValue;
+                          }
+                          if (pointerPosition['coteValue']! as int == 227) {
+                            pointerPosition['coteValue'] = 227;
+                          }
+                          pointerStatus['move'] = 'plus';
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('c') &&
+                            int.parse(pointerPosition['coteValue']
+                                        .toString()) ~/
+                                    100 ==
+                                3) {
+                          //win c
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          if (pointerPosition['coteValue']! as int > 327) {
+                            pointerPosition['coteValue'] = afterWinValue;
+                          }
+                          if (pointerPosition['coteValue']! as int == 327) {
+                            pointerPosition['coteValue'] = 327;
+                          }
+                          pointerStatus['move'] = 'plus';
+                        } else if (pointerPosition['pointer']!
+                                .toString()
+                                .startsWith('d') &&
+                            int.parse(pointerPosition['coteValue']
+                                        .toString()) ~/
+                                    100 ==
+                                4) {
+                          //win c
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          pointerPosition['coteValue'] = 21 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              1;
+                          if (pointerPosition['coteValue']! as int > 427) {
+                            pointerPosition['coteValue'] = afterWinValue;
+                          }
+                          if (pointerPosition['coteValue']! as int == 427) {
+                            pointerPosition['coteValue'] = 427;
+                          }
+                          pointerStatus['move'] = 'plus';
+                        } else {
+                          pointerPosition['coteValue'] = 31 +
+                              (firstDigit * 100) +
+                              (11 - lastTwoDigits) -
+                              2;
+                          pointerStatus['move'] = 'plus';
+                        }
+                        break;
+                    }
+                    listPointer4Player.refresh();
+                  }
+                }
+              }
+            });
+          }
+        } else if (pointerStatus['pointer'] == pointer &&
+            pointerStatus['status'] == 'inactive') {
+          positionListOfPointer.forEach((player) {
+            if (player['pointer'] == pointer) {
+              int coteValue = player['coteValue'] as int;
+              //set initial value
+              if (coteValue > 100 && coteValue < 105) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 132;
+              }
+              if (coteValue > 200 && coteValue < 205) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 232;
+              }
+              if (coteValue > 300 && coteValue < 305) {
+                makePointerActive(pointer: pointer);
+                player['coteValue'] = 332;
+              }
+              if (coteValue > 400 && coteValue < 405) {
+                player['coteValue'] = 432;
+                makePointerActive(pointer: pointer);
               }
             }
           });
         }
-      } else if (pointerStatus['pointer'] == pointer &&
-          pointerStatus['status'] == 'inactive') {
-        positionListOfPointer.forEach((player) {
-          if (player['pointer'] == pointer) {
-            int coteValue = player['coteValue'] as int;
-            //set initial value
-            if (coteValue > 100 && coteValue < 105) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 124;
-            }
-            if (coteValue > 200 && coteValue < 205) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 232;
-            }
-            if (coteValue > 300 && coteValue < 305) {
-              makePointerActive(pointer: pointer);
-              player['coteValue'] = 332;
-            }
-            if (coteValue > 400 && coteValue < 405) {
-              player['coteValue'] = 432;
-              makePointerActive(pointer: pointer);
-            }
-          }
-        });
-      }
-    });
-    updateThePositionOfPointer(pointerName: pointer);
-    // }
-    // isValueGiven.value = true;
+      });
+      updateThePositionOfPointer(pointerName: pointer);
+    }
+    isValueGiven.value = true;
   }
 
   void updateThePositionOfPointer({required String pointerName}) {
@@ -405,7 +436,122 @@ class ComputerGameController extends GetxController {
     });
   }
 
+  // //cut others pointe
+  // void checkCutPointer({required int pointerValue}) {
+  //   print(pointerValue);
+  //   print(currentPlayer);
+  //   positionListOfPointer.forEach((pointerLocation) {
+  //     if (pointerLocation['coteValue'] == pointerValue &&
+  //         pointerLocation['pointer']
+  //                 .toString()
+  //                 .startsWith(currentPlayer.value) ==
+  //             false) {
+  //       switch (pointerLocation['pointer']) {
+  //         case 'a1':
+  //           pointerLocation['coteValue'] = 101;
+  //           break;
+  //         case 'a2':
+  //           pointerLocation['coteValue'] = 102;
+  //           break;
+  //         case 'a3':
+  //           pointerLocation['coteValue'] = 103;
+  //           break;
+  //         case 'a4':
+  //           pointerLocation['coteValue'] = 104;
+  //           break;
+  //         case 'b1':
+  //           pointerLocation['coteValue'] = 201;
+  //           break;
+  //         case 'b2':
+  //           pointerLocation['coteValue'] = 202;
+  //           break;
+  //         case 'b3':
+  //           pointerLocation['coteValue'] = 203;
+  //           break;
+  //         case 'b4':
+  //           pointerLocation['coteValue'] = 204;
+  //           break;
+  //         case 'c1':
+  //           pointerLocation['coteValue'] = 301;
+  //           break;
+  //         case 'c2':
+  //           pointerLocation['coteValue'] = 302;
+  //           break;
+  //         case 'c3':
+  //           pointerLocation['coteValue'] = 303;
+  //           break;
+  //         case 'c4':
+  //           pointerLocation['coteValue'] = 304;
+  //           break;
+  //         case 'd1':
+  //           pointerLocation['coteValue'] = 401;
+  //           break;
+  //         case 'd2':
+  //           pointerLocation['coteValue'] = 402;
+  //           break;
+  //         case 'd3':
+  //           pointerLocation['coteValue'] = 403;
+  //           break;
+  //         case 'd4':
+  //           pointerLocation['coteValue'] = 404;
+  //           break;
+  //       }
+  //       positionListOfPointer.refresh();
+  //       print('cutted');
+  //     } else {
+  //       print('not cutted');
+  //     }
+  //   });
+  // }
+
   //logic end
+
+  final listOfDiceRolling = [
+    {'player': 'a', 'dice': 'active'},
+    {'player': 'b', 'dice': 'inactive'},
+    {'player': 'c', 'dice': 'inactive'},
+    {'player': 'd', 'dice': 'inactive'}
+  ].obs;
+
+  final activeDicePlayer = 'a'.obs;
+
+  void updateDice({required String player}) {
+    listOfDiceRolling.forEach((dice) {
+      if (dice['player'] == player) {
+        dice['dice'] = 'active';
+        activeDicePlayer.value = player;
+      } else {
+        dice['dice'] = 'inactive';
+      }
+    });
+    print(listOfDiceRolling);
+  }
+
+// Define observables for each variable
+  final aActiveNumber = 0.obs;
+  final bActiveNumber = 0.obs;
+  final cActiveNumber = 0.obs;
+  final dActiveNumber = 0.obs;
+
+  void updateActiveNumber({required String player}) {
+    listPointer4Player.forEach((element) {
+      String pointer = element['pointer']!.toString();
+      if (pointer.startsWith('a') && element['status'] == 'active') {
+        // Increment the value of aActiveNumber
+        aActiveNumber.value++;
+      } else if (pointer.startsWith('b') && element['status'] == 'active') {
+        // Increment the value of bActiveNumber
+        bActiveNumber.value++;
+      } else if (pointer.startsWith('c') && element['status'] == 'active') {
+        // Increment the value of cActiveNumber
+        cActiveNumber.value++;
+      } else if (pointer.startsWith('d') && element['status'] == 'active') {
+        // Increment the value of dActiveNumber
+        dActiveNumber.value++;
+      }
+    });
+  }
+  // play audio
 
   final audioDicePlayer = AudioPlayer();
 
@@ -414,7 +560,7 @@ class ComputerGameController extends GetxController {
     await audioDicePlayer.play();
   }
 
-  //game logic started
+  //Pointer List
   final listPointer4Player = [
     //a
     {'pointer': 'a1', 'value': 101, 'status': 'inactive', 'move': 'plus'},
@@ -563,52 +709,4 @@ class ComputerGameController extends GetxController {
     {'coteValue': 327, 'left': 183, 'bottom': 195},
     {'coteValue': 427, 'left': 200, 'bottom': 183},
   ];
-
-  //dice rolling list
-
-  final listOfDiceRolling = [
-    {'player': 'a', 'dice': 'active'},
-    {'player': 'b', 'dice': 'inactive'},
-    {'player': 'c', 'dice': 'inactive'},
-    {'player': 'd', 'dice': 'inactive'}
-  ].obs;
-
-  final activeDicePlayer = 'a'.obs;
-
-  void updateDice({required String player}) {
-    listOfDiceRolling.forEach((dice) {
-      if (dice['player'] == player) {
-        dice['dice'] = 'active';
-        activeDicePlayer.value = player;
-      } else {
-        dice['dice'] = 'inactive';
-      }
-    });
-    print(listOfDiceRolling);
-  }
-
-// Define observables for each variable
-  final aActiveNumber = 0.obs;
-  final bActiveNumber = 0.obs;
-  final cActiveNumber = 0.obs;
-  final dActiveNumber = 0.obs;
-
-  void updateActiveNumber({required String player}) {
-    listPointer4Player.forEach((element) {
-      String pointer = element['pointer']!.toString();
-      if (pointer.startsWith('a') && element['status'] == 'active') {
-        // Increment the value of aActiveNumber
-        aActiveNumber.value++;
-      } else if (pointer.startsWith('b') && element['status'] == 'active') {
-        // Increment the value of bActiveNumber
-        bActiveNumber.value++;
-      } else if (pointer.startsWith('c') && element['status'] == 'active') {
-        // Increment the value of cActiveNumber
-        cActiveNumber.value++;
-      } else if (pointer.startsWith('d') && element['status'] == 'active') {
-        // Increment the value of dActiveNumber
-        dActiveNumber.value++;
-      }
-    });
-  }
 }
