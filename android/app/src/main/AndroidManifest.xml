@@ -10,7 +10,7 @@
 
 
     <application
-        android:label="ludu_365"
+        android:label="Ludo 365"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

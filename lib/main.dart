@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ludu_365/presentation/home_screen/controller/auth_controller.dart';
 
 import 'core/app_export.dart';
- 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -13,7 +13,7 @@ void main() {
     Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
     runApp(MyApp());
   });
- Get.put(AuthController());
+  Get.put(AuthController());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         translations: AppLocalization(),
         locale: Get.deviceLocale, //for setting localization strings
         fallbackLocale: Locale('en', 'US'),
-        title: 'ludu_365',
+        title: 'Ludo 365',
         initialBinding: InitialBindings(),
         initialRoute: AppRoutes.initialRoute,
         getPages: AppRoutes.pages,
